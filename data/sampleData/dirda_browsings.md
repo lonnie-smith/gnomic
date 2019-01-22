@@ -1,7 +1,11 @@
 ---
-title: Browsings
+title: Browsings (2015)
 author: Dirda, Michael
 date: 10/22/2015
+tags: 
+    - Review
+    - Book by Book [work]
+    - Books on books
 ---
 
 > Close friends, or those in my pay, sometimes call me a literary polymath, while others say that I'm just a shallow dilettante, superficial and breezy, with a faux-naif lifestyle. (222)

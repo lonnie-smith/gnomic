@@ -1,8 +1,13 @@
 ---
-title: H is for Hawk
+title: H is for Hawk (2015)
 author: Macdonald, Helen
 date: 2/6/2016
-tags: Nature, Mimesis, Moby Dick, T. H. White, Violence
+tags: 
+    - Nature
+    - Mimesis
+    - Moby Dick [work]
+    - T. H. White [person]
+    - Violence
 ---
 
 Some emerging themes

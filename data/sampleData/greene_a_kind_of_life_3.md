@@ -1,8 +1,11 @@
 ---
-title: A Kind of Life
+title: A Sort of Life (1972)
 author: Greene, Graham
 date: 10/28/2015
-tags: Religion, Pierre Teilhard de Chardin
+tags: 
+    - Religion [topic]
+    - Pierre Teilhard de Chardin [person]
+    - Catholicism [topic]
 ---
 
 Graham Greene's conversion is another instance where the interesting bits seem almost entirely left out. He starts visiting a priest because he is engaged to marry a Catholic and feels he owes it to her to at least have a basic understanding of the faith's tenants, but expects to remain a "dogmatic" atheist.

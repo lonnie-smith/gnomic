@@ -1,8 +1,12 @@
 ---
-title: A Kind of Life
+title: A Sort of Life (1972)
 author: Greene, Graham
 date: 10/28/2015
-tags: Boredom, Curiosity, Suicide
+tags: 
+    - Boredom
+    - Curiosity
+    - Suicide
+    - Autobiography
 ---
 
 Graham Greene's character is weirdly opaque. He tormented by an emotion he describes as "boredom," which he treats in adolescence with the "drug” of Russian roulette:

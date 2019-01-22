@@ -1,8 +1,11 @@
 ---
-title: A Kind of Life
+title: A Sort of Life (1972)
 author: Greene, Graham
 date: 10/31/2015
-tags: Writing, Careers, Journalism
+tags: 
+    - Writing
+    - Careers
+    - Journalism
 ---
 
 File this under "those were different times"--

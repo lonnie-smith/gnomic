@@ -1,7 +1,10 @@
 ---
-title: A Dance to the Music of Time
+title: "A Dance to the Music of Time: A Question of Upbringing (1951)"
 author: Powell, Anthony
 date: 10/23/2015
+tags:
+    - Review
+    - Narrative
 ---
 
 It hasn't got much in the way of plots. Or, maybe it does, but the arc is so slow--stretching out over 12 novels-- that it just isn't all that readily perceived 300 pages in? Either way, this is the sort of book where you set up and take notice when the plot marches forward slightly with a sentence like "The minutes past: the conversation flagged." It's like sitting in traffic.

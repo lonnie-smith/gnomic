@@ -1,8 +1,12 @@
 ---
-title: A Kind of Life
+title: A Sort of Life (1972)
 author: Greene, Graham
 date: 11/7/2015
-tags: Grief, Sympathy, Cliché, Flaubert
+tags: 
+    - Grief
+    - Sympathy
+    - Cliché
+    - Gustave Flaubert [person]
 ---
 
 Lying in a hospital ward recovering from an appendectomy, Greene gathers "material" watching a 10-year-old boy die of complications from a broken leg.

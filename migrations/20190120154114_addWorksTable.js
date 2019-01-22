@@ -6,10 +6,19 @@ exports.up = function(knex, Promise) {
                 table.string('authorLastName').notNullable();
                 table.string('authorFirstName').notNullable();
                 table.string('title').notNullable();
-                table.string('publicationYear').notNullable();
+                table.string('publicationYear');
+            })
+            .then(() => {
+                return knex.schema.alterTable('works', table => {
+                    table.unique([
+                        'authorLastName',
+                        'authorFirstName',
+                        'title',
+                    ]);
+                })
             });
         };
-    });
+    })
 };
 
 exports.down = function(knex, Promise) {

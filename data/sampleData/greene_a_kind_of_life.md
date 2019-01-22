@@ -1,8 +1,9 @@
 ---
-title: A Kind of Life
+title: A Sort of Life (1972)
 author: Greene, Graham
 date: 10/28/2015
-tags: time
+tags: 
+- Time
 ---
 
 This is a nice description of growing out of a feeling:
