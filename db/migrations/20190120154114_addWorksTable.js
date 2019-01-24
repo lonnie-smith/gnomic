@@ -15,10 +15,10 @@ exports.up = function(knex, Promise) {
                         'authorFirstName',
                         'title',
                     ]);
-                })
+                });
             });
         };
-    })
+    });
 };
 
 exports.down = function(knex, Promise) {

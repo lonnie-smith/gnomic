@@ -24,7 +24,7 @@
     "license": "MIT",
     "scripts": {
         "knex": "NODE_ENV=development knex",
-        "import": "NODE_ENV=development knex migrate:latest; NODE_ENV=development node data/import.js"
+        "import": "NODE_ENV=development knex migrate:latest; NODE_ENV=development node db/import/index.js"
     },
     "devDependencies": {}
 }

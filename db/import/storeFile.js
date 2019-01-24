@@ -1,11 +1,11 @@
 const path = require('path');
 
-const tagTypes = require('./tagTypes');
+const tagTypes = require('../tagTypes');
 
 const TAG_TYPE_RX = /(.*?)\s+\[(.*)\]/;
 const PUB_YEAR_RX = /(.*?)\s+\((.*?)\)$/;
 
-module.exports = function(filePath, vfile, knex) {
+module.exports = function(filePath, vfile) {
     return new Promise((resolve, reject) => {
         const slug = getSlug(filePath);
         const authorName = getAuthor(filePath, vfile);

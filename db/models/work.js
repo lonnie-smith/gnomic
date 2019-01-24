@@ -1,7 +1,8 @@
 // TODO: can we require knex directly instead of passing down?
- 
+const db = require('../../db/db');
+
 module.exports = class Work {
-    constructor(knex, {
+    constructor({
         id,
         authorFirstName,
         authorLastName,
@@ -9,7 +10,6 @@ module.exports = class Work {
         title,
     }) {
         this._table = 'works';
-        this._knex = knex;
         this.id = id;
         this.authorFirstName = authorFirstName;
         this.authorLastName = authorLastName;
