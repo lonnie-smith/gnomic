@@ -1,12 +1,17 @@
-// Update with your config settings.
+const env = require('env-merger')();
 
 module.exports = {
     development: {
         client: 'sqlite3',
         connection: {
-            filename: './dev.sqlite3',
+            filename: process.env.SQLITE_FILE,
+            // filename: './devDb.sqlite3',
         },
         useNullAsDefault: true,
+        migrations: {
+            directory: process.env.MIGRATIONS_DIR,
+            // directory: './db/migrations',
+        },
     },
 
     // staging: {

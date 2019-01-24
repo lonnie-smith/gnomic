@@ -14,19 +14,19 @@ module.exports = function(filePath, vfile, knex) {
         const url = getUrl(filePath, vfile);
         const tags = getTags(filePath, vfile)
             .concat(
-                {
-                    tag: `${authorName.first} ${authorName.last}`,
-                    type: 'person',
-                },
-                {
-                    tag: title,
-                    type: 'work',
-                });
+            {
+                tag: `${authorName.first} ${authorName.last}`,
+                type: 'person',
+            },
+            {
+                tag: title,
+                type: 'work',
+            });
 
-        
+
         resolve();
     });
-}
+};
 
 function getSlug(filePath) {
     return encodeURIComponent(
@@ -54,16 +54,12 @@ function getTitle(filePath, vfile) {
         throw new Error(`Missing title metadata in ${filePath}`);
     }
 
-    match = title.match(PUB_YEAR_RX);
+    const match = title.match(PUB_YEAR_RX);
     if (!match) {
         return { title };
+    }    else {
+        return { title: match[1], pubYear: match[2] };
     }
-
-    else {
-        return { title: match[1], pubYear: match[2] }
-    }
-
-    return title;
 }
 
 function getDate(filePath, vfile) {
@@ -84,7 +80,7 @@ function getTags(filePath, vfile) {
     const tags = vfile.data
         && vfile.data.tags;
     if (!tags) {
-        return []
+        return [];
     }
     return tags.map(tag => {
         const match = tag.match(TAG_TYPE_RX);

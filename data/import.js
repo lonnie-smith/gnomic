@@ -3,7 +3,9 @@ const glob = require('glob');
 const parse = require('./parse');
 const store = require('./store');
 
-const knex = require('knex')(require('./knexfile'));
+require('env-merger')();
+const knexConfig = require('../knexfile')[process.env.NODE_ENV];
+const knex = require('knex')(knexConfig);
 
 glob('./data/sampleData/**/*.md', (err, matches) => {
     const promises = matches.map(path => {
@@ -16,10 +18,4 @@ glob('./data/sampleData/**/*.md', (err, matches) => {
         console.error('Error:');
         console.error(err);
     });
-})
-
-
-
-
-
-
+});
