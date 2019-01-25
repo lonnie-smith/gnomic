@@ -6,4 +6,4 @@ node_modules
 
 # database
 devDb.sqlite3
-
+devDb.sqlite3-journal

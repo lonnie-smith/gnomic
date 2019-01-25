@@ -19,9 +19,9 @@ module.exports = class Tag extends BaseModel {
         };
     }
 
-    async save() {
+    async save(currentTransaction = null) {
         return super.save({
             tag: this.tag,
-        });
+        }, currentTransaction);
     }
 };

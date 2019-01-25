@@ -27,10 +27,6 @@ module.exports = class Fragment extends BaseModel {
         };
     }
 
-    async _update() {
-        await super._update();
-    }
-
     async _updateTags() {
         for (const tag of this.tags) {
             await tag.save();
@@ -52,14 +48,22 @@ module.exports = class Fragment extends BaseModel {
     }
 
     async save() {
-        await this.work.save();
-        await super.save({
-            slug: this.slug,
+        return db.transaction(transaction => {
+            return this.work.save(transaction)
+                .then(() => {
+                    return super.save({
+                        slug: this.slug,
+                    }, transaction);
+                })
+                .then(() => {
+                    return transaction('works')
+                        .whereNotIn('id',
+                            transaction.select('workId').from('fragments'))
+                        .del();
+                })
+                .then(() => {
+                    return Promise.resolve();
+                });
         });
-        await db('works')
-            .whereNotIn('id',
-                db.select('workId').from('fragments'))
-            .del();
-        await this._updateTags();
     }
 };

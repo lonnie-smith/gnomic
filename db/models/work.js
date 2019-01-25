@@ -28,11 +28,11 @@ module.exports = class Work extends BaseModel {
         };
     }
 
-    async save() {
+    async save(currentTransaction = null) {
         return super.save({
             authorFirstName: this.authorFirstName,
             authorLastName: this.authorLastName,
             title: this.title,
-        });
+        }, currentTransaction);
     }
 };
