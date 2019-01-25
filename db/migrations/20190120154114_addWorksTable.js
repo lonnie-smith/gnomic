@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
                 table.string('authorLastName').notNullable();
                 table.string('authorFirstName').notNullable();
                 table.string('title').notNullable();
+                table.string('url');
                 table.string('publicationYear');
             })
             .then(() => {

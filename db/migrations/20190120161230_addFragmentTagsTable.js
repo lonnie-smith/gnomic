@@ -3,9 +3,11 @@ exports.up = function(knex, Promise) {
         if (!exists) {
             return knex.schema.createTable('fragmentTags', table => {
                 table.integer('fragmentId').notNullable()
-                    .references('fragments.id');
+                    .references('fragments.id')
+                    .onDelete('CASCADE');
                 table.integer('tagId').notNullable()
-                    .references('tags.id');
+                    .references('tags.id')
+                    .onDelete('CASCADE');
             });
         }
     });

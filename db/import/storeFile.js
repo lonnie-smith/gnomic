@@ -1,41 +1,52 @@
 const path = require('path');
 
-const db = '../db';
 const tagTypes = require('../tagTypes');
 const Work = require('../models/work');
+const Fragment = require('../models/fragment');
+const Tag = require('../models/tag');
 
 const TAG_TYPE_RX = /(.*?)\s+\[(.*)\]/;
 const PUB_YEAR_RX = /(.*?)\s+\((.*?)\)$/;
 
-module.exports = function(filePath, vfile) {
-    return new Promise((resolve, reject) => {
-        const slug = getSlug(filePath);
-        const authorName = getAuthor(filePath, vfile);
-        const title = getTitle(filePath, vfile);
-        const date = getDate(filePath, vfile);
-        const url = getUrl(filePath, vfile);
-        const tags = getTags(filePath, vfile)
-            .concat(
-            {
-                tag: `${authorName.first} ${authorName.last}`,
-                type: 'person',
-            },
-            {
-                tag: title,
-                type: 'work',
-            });
+module.exports = async function(filePath, vfile) {
+    const slug = getSlug(filePath);
+    const authorName = getAuthor(filePath, vfile);
+    const title = getTitle(filePath, vfile);
+    const date = getDate(filePath, vfile);
+    const url = getUrl(filePath, vfile);
+    const tags = getTags(filePath, vfile)
+        .concat(
+        {
+            tag: `${authorName.first} ${authorName.last}`,
+            type: 'person',
+        },
+        {
+            tag: title.title,
+            type: 'work',
+        });
 
-        const work = new Work({
-            authorFirstName: authorName.first,
-            authorLastName: authorName.last,
-            publicationYear: title.pubYear,
-            title: title.title,
-        });
-        work.insertOrUpdate().then(rslt => {
-            console.log('outer', rslt);
-            // db.destroy();
-        });
+    const work = new Work({
+        authorFirstName: authorName.first,
+        authorLastName: authorName.last,
+        publicationYear: title.pubYear,
+        title: title.title,
+        url: url,
     });
+
+    const tagModels = tags.map(t => {
+        return new Tag(t);
+    });
+
+    const fragment = new Fragment({
+        slug: slug,
+        work: work,
+        date: date,
+        content: vfile.contents,
+        tags: tagModels,
+    });
+    await fragment.save();
+
+    return fragment.slug;
 };
 
 function getSlug(filePath) {
@@ -51,6 +62,9 @@ function getAuthor(filePath, vfile) {
     }
 
     const names = author.split(/,\s+/);
+    if (names.length !== 2) {
+        throw new Error(`Could not parse author name in ${filePath}.`);
+    }
     return {
         first: names[1],
         last: names[0],
