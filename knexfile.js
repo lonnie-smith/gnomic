@@ -1,4 +1,4 @@
-const env = require('env-merger')();
+require('env-merger')();
 
 module.exports = {
     development: {
