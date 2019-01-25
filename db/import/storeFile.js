@@ -1,5 +1,6 @@
 const path = require('path');
 
+const { parseAuthor } = require('../util');
 const tagTypes = require('../tagTypes');
 const Work = require('../models/work');
 const Fragment = require('../models/fragment');
@@ -61,14 +62,13 @@ function getAuthor(filePath, vfile) {
         throw new Error(`Missing author metadata in ${filePath}.`);
     }
 
-    const names = author.split(/,\s+/);
-    if (names.length !== 2) {
+    let name;
+    try {
+        name = parseAuthor(author, true);
+    } catch (e) {
         throw new Error(`Could not parse author name in ${filePath}.`);
     }
-    return {
-        first: names[1],
-        last: names[0],
-    };
+    return name;
 }
 
 function getTitle(filePath, vfile) {

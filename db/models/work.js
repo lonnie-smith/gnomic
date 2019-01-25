@@ -30,6 +30,22 @@ module.exports = class Work extends BaseModel {
         };
     }
 
+    static get query() {
+        return db.from('works')
+            // .leftJoin('fragments', 'works.id', 'fragments.workId')
+            .select('works.id as workId',
+                'works.authorLastName',
+                'works.authorFirstName',
+                'works.publicationYear',
+                'works.title',
+                'works.url',
+                );
+    }
+
+    static async list() {
+        return Work.query;
+    }
+
     async save(currentTransaction = null) {
         return super.save({
             authorFirstName: this.authorFirstName,
