@@ -30,7 +30,7 @@ module.exports = async function(filePath, vfile) {
         authorLastName: authorName.last,
         publicationYear: title.pubYear,
         title: title.title,
-        url: url,
+        url,
     });
 
     const tagModels = tags.map(t => {
@@ -38,9 +38,9 @@ module.exports = async function(filePath, vfile) {
     });
 
     const fragment = new Fragment({
-        slug: slug,
-        work: work,
-        date: date,
+        slug,
+        work,
+        date,
         content: vfile.contents,
         tags: tagModels,
     });

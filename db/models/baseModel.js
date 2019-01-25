@@ -39,4 +39,4 @@ module.exports = class BaseModel {
             return this._insert();
         }
     }
-}
+};

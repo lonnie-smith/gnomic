@@ -24,13 +24,13 @@ module.exports = class Fragment extends BaseModel {
             date: this.date,
             content: this.content,
             workId: this.work.id,
-        }
+        };
     }
 
     async _update() {
         await super._update();
     }
-    
+
     async _updateTags() {
         for (const tag of this.tags) {
             await tag.save();
@@ -46,11 +46,11 @@ module.exports = class Fragment extends BaseModel {
                 };
             }));
         await db('tags')
-            .whereNotIn('id', 
+            .whereNotIn('id',
                 db.select('tagId').from('fragmentTags'))
             .del();
     }
-    
+
     async save() {
         await this.work.save();
         await super.save({
@@ -62,4 +62,4 @@ module.exports = class Fragment extends BaseModel {
             .del();
         await this._updateTags();
     }
-}
+};

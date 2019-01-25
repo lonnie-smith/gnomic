@@ -4,7 +4,8 @@ exports.up = function(knex, Promise) {
         if (!exists) {
             return knex.schema.createTable('tags', table => {
                 table.increments('id').primary();
-                table.string('tag').unique().notNullable();
+                table.string('tag').unique()
+                    .notNullable();
                 table.enu('type', [
                     'person',
                     'work',

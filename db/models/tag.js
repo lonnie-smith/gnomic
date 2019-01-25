@@ -16,7 +16,7 @@ module.exports = class Tag extends BaseModel {
         return {
             tag: this.tag,
             type: this.type,
-        }
+        };
     }
 
     async save() {

@@ -25,7 +25,7 @@ module.exports = class Work extends BaseModel {
             publicationYear: this.publicationYear,
             title: this.title,
             url: this.url,
-        }
+        };
     }
 
     async save() {
