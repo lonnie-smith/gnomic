@@ -3,11 +3,13 @@ const db = require('../db');
 
 module.exports = class Tag extends BaseModel {
     constructor({
+        id = null,
         tag,
         type,
     }) {
         super();
         this._table = 'tags';
+        this.id = id;
         this.tag = tag;
         this.type = type;
     }

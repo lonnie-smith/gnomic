@@ -1,8 +1,10 @@
 const db = require('../db');
 const BaseModel = require('./baseModel');
+const Work = require('./work');
 
 module.exports = class Fragment extends BaseModel {
     constructor({
+        id = null,
         slug,
         date,
         content,
@@ -11,8 +13,11 @@ module.exports = class Fragment extends BaseModel {
     }) {
         super();
         this._table = 'fragments';
+        this.id = id;
         this.slug = slug;
-        this.date = date;
+        this.date = typeof(date) === 'number'
+            ? new Date(date)
+            : date;
         this.content = content;
         this.work = work;
         this.tags = tags;
@@ -25,6 +30,41 @@ module.exports = class Fragment extends BaseModel {
             content: this.content,
             workId: this.work.id,
         };
+    }
+
+    static async list() {
+        return db.from('fragments')
+            .innerJoin('works', 'fragments.workId', 'works.id')
+            .select('fragments.id as fragmentId',
+            'fragments.slug',
+            'fragments.date',
+            'works.id as workId',
+            'works.authorLastName',
+            'works.authorFirstName',
+            'works.title',
+            'works.url',
+            'works.publicationYear'
+            )
+            .then(rows => {
+                return rows.map(row => {
+                    const work = new Work({
+                        id: row.workId,
+                        authorLastName: row.authorLastName,
+                        authorFirstName: row.authorFirstName,
+                        title: row.title,
+                        url: row.url,
+                        publicationYear: row.publicationYear,
+                    });
+                    return new Fragment({
+                        id: row.fragmentId,
+                        slug: row.slug,
+                        date: row.date,
+                        content: null,
+                        work,
+                        tags: [],
+                    });
+                });
+            });
     }
 
     async _updateTags(currentTransaction = null) {

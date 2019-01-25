@@ -3,6 +3,7 @@ const db = require('../db');
 
 module.exports = class Work extends BaseModel {
     constructor({
+        id = null,
         authorFirstName,
         authorLastName,
         publicationYear,
@@ -11,6 +12,7 @@ module.exports = class Work extends BaseModel {
     }) {
         super();
         this._table = 'works';
+        this.id = id;
         this.authorFirstName = authorFirstName;
         this.authorLastName = authorLastName;
         this.publicationYear = publicationYear;
