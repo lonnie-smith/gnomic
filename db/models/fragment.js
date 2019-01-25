@@ -27,24 +27,22 @@ module.exports = class Fragment extends BaseModel {
         };
     }
 
-    async _updateTags() {
+    async _updateTags(currentTransaction = null) {
+        const knex = currentTransaction || db;
         for (const tag of this.tags) {
-            await tag.save();
+            await tag.save(currentTransaction);
         }
-        await db('fragmentTags')
+        await knex('fragmentTags')
             .where({ fragmentId: this.id })
             .del();
-        await db('fragmentTags')
+        await knex('fragmentTags')
             .insert(this.tags.map(tag => {
                 return {
                     fragmentId: this.id,
                     tagId: tag.id,
                 };
             }));
-        await db('tags')
-            .whereNotIn('id',
-                db.select('tagId').from('fragmentTags'))
-            .del();
+        return await Fragment.purgeTags(currentTransaction);
     }
 
     async save() {
@@ -55,15 +53,28 @@ module.exports = class Fragment extends BaseModel {
                         slug: this.slug,
                     }, transaction);
                 })
-                .then(() => {
-                    return transaction('works')
-                        .whereNotIn('id',
-                            transaction.select('workId').from('fragments'))
-                        .del();
-                })
-                .then(() => {
-                    return Promise.resolve();
-                });
+                .then(() => Fragment.purgeWorks(transaction))
+                .then(() => this._updateTags(transaction));
         });
+    }
+
+    static async purgeWorks(currentTransaction = null) {
+        const knex = currentTransaction || db;
+        return knex('works')
+            .whereNotIn('id', knex.select('workId').from('fragments'))
+            .del();
+    }
+
+    static async purgeTags(currentTransaction = null) {
+        const knex = currentTransaction || db;
+        return knex('fragmentTags')
+            .whereNotIn('fragmentId', knex.select('id').from('fragments'))
+            .del()
+            .then(() => {
+                return knex('tags')
+                    .whereNotIn('id',
+                        knex.select('tagId').from('fragmentTags'))
+                    .del();
+            });
     }
 };

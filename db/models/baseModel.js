@@ -17,8 +17,6 @@ module.exports = class BaseModel {
             .then(() => knex(this._table).max('id as newId'))
             .then(rows => {
                 this.id = rows[0].newId;
-                console.log('set id for', this.constructor.name, this.id);
-                return Promise.resolve();
             });
     }
 
