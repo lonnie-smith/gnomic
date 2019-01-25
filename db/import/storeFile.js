@@ -1,6 +1,8 @@
 const path = require('path');
 
+const db = '../db';
 const tagTypes = require('../tagTypes');
+const Work = require('../models/work');
 
 const TAG_TYPE_RX = /(.*?)\s+\[(.*)\]/;
 const PUB_YEAR_RX = /(.*?)\s+\((.*?)\)$/;
@@ -23,8 +25,16 @@ module.exports = function(filePath, vfile) {
                 type: 'work',
             });
 
-
-        resolve();
+        const work = new Work({
+            authorFirstName: authorName.first,
+            authorLastName: authorName.last,
+            publicationYear: title.pubYear,
+            title: title.title,
+        });
+        work.insertOrUpdate().then(rslt => {
+            console.log('outer', rslt);
+            // db.destroy();
+        });
     });
 };
 

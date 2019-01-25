@@ -14,5 +14,8 @@ glob('./data/sampleData/**/*.md', (err, matches) => {
     Promise.all(promises).catch(err => {
         console.error('Error:');
         console.error(err);
+    })
+    .then(() => {
+        console.log('done');
     });
 });

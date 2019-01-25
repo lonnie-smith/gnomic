@@ -1,16 +1,15 @@
 // TODO: can we require knex directly instead of passing down?
-const db = require('../../db/db');
+const db = require('../db');
 
 module.exports = class Work {
     constructor({
-        id,
         authorFirstName,
         authorLastName,
         publicationYear,
         title,
     }) {
         this._table = 'works';
-        this.id = id;
+        this.id = null;
         this.authorFirstName = authorFirstName;
         this.authorLastName = authorLastName;
         this.publicationYear = publicationYear;
@@ -29,17 +28,17 @@ module.exports = class Work {
     //         authorLastName: data.authorLastName,
     //         title: data.title,
     //     })
-    //     .select('*'); 
+    //     .select('*');
     //     // TODO
     // }
 
     async insert() {
         // todo: move this to superclass
-        return this.knex(this._table).insert({
+        return db(this._table).insert({
             authorLastName: this.authorLastName,
             authorFirstName: this.authorFirstName,
             title: this.title,
-            publicationYear: this.publicationYear, 
+            publicationYear: this.publicationYear,
         });
     }
 
@@ -48,7 +47,26 @@ module.exports = class Work {
     }
 
     async insertOrUpdate() {
-        // TODO
+        return db(this._table)
+            .where({
+                authorFirstName: 'foo',
+                authorLastName: 'foo',
+                title: 'foo',
+                // authorFirstName: this.authorFirstName,
+                // authorLastName: this.authorLastName,
+                // title: this.title,
+            })
+            .distinct()
+            .select('id')
+            .then(rslt => {
+                console.log(rslt);
+                return rslt;
+            })
+            .catch(err => {
+                console.error(err);
+            })
+            .finally(() => {
+                // db.destroy();
+            });
     }
-
-}
+};

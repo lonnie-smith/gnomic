@@ -12,6 +12,7 @@ module.exports = {
             directory: process.env.MIGRATIONS_DIR,
             // directory: './db/migrations',
         },
+        // debug: true,
     },
 
     // staging: {
