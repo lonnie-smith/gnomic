@@ -1,9 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const Fragment = require('./db/models/fragment');
-const Work = require('./db/models/work');
-const Tag = require('./db/models/tag');
+const Fragment = require('../db/models/fragment');
+const Work = require('../db/models/work');
+const Tag = require('../db/models/tag');
 
 require('env-merger')();
 
@@ -12,9 +12,8 @@ const port = process.env.PORT || 80;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-
-
+app.set('views', './app/views');
+app.set('view engine', 'pug');
 
 const router = express.Router();
 
@@ -61,6 +60,18 @@ router.get('/works', (req, res) => {
 });
 
 app.use('/api', router);
+
+app.get('/', (req, res) => {
+    let fragments;
+    Fragment.list().then(rows => {
+        fragments = rows;
+    })
+    .then(() => {
+        res.render('index', {
+            fragments,
+        });
+    });
+});
 
 app.listen(port);
 console.log('Gnomic server started on port', port);
