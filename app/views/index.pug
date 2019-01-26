@@ -1,2 +1,24 @@
-p Hello World
-p #{JSON.stringify(fragments)}
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(name='lang', content=`${language}`)
+        meta(name='robots', content='noodp, noydir')
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0')
+
+        //- link(rel='stylesheet', media='screen, projection', href=`/assets/styles/modern.css?v=${version}`)
+
+body
+
+    p Hello World
+    p #{JSON.stringify(fragments)}
+
+    //- script.
+    //-     window.appLocale = '#{language}';
+    //-     window.GLOBAL = {
+    //-         VERSION: '#{version}'
+    //-     };
+    //- script(src=`/assets/scripts/vendor.js?v=${version}`)
+    //- script(src=`/assets/scripts/main.js?v=${version}`)
+
+
