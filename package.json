@@ -4,6 +4,12 @@
     "description": "A personal website",
     "version": "0.1.0",
     "author": "Lonnie Smith <lawrence.smith.3@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "knex": "knex",
+        "import": "node db/import/index.js",
+        "dev": "NODE_ENV=development nodemon --watch ./app --watch ./db ./app/server.js"
+    },
     "dependencies": {
         "body-parser": "1.18.3",
         "cross-env": "5.2.0",
@@ -24,10 +30,7 @@
         "vfile-reporter": "5.1.1",
         "yaml": "1.2.1"
     },
-    "license": "MIT",
-    "scripts": {
-        "knex": "NODE_ENV=development knex",
-        "import": "NODE_ENV=development knex migrate:latest; NODE_ENV=development node db/import/index.js"
-    },
-    "devDependencies": {}
+    "devDependencies": {
+        "nodemon": "1.18.9"
+    }
 }
