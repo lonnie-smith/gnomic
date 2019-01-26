@@ -1,0 +1,18 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(name='lang', content=`${language}`)
+        meta(name='robots', content='noodp, noydir')
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0')
+
+        link(rel='stylesheet', media='screen, projection', href=`/assets/styles/main.css?v=${cacheBuster}`)
+
+body
+    div(id="appRoot")
+        gnomic-app-container(
+            :init-data!=`${fragments}`)
+
+    script(src=`/assets/scripts/main.js?v=${cacheBuster}`)
+
+

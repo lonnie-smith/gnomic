@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const escapeData = require('./util/escapeData');
 const Fragment = require('../db/models/fragment');
 const Work = require('../db/models/work');
 const Tag = require('../db/models/tag');
@@ -12,10 +13,17 @@ const port = process.env.PORT || 80;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.set('views', './app/views');
+app.set('views', './server/views');
 app.set('view engine', 'pug');
 
-const router = express.Router();
+const CACHE_BUSTER = (new Date()).valueOf();
+
+app.use('/assets', express.static('server/static/assets', {
+    fallthrough: false,
+    index: false,
+}));
+
+const router = express.Router(); /* eslint-disable-line new-cap */
 
 // query params: work, authorFullName (last, first), tag
 router.get('/fragments', (req, res) => {
@@ -63,14 +71,18 @@ app.use('/api', router);
 
 app.get('/', (req, res) => {
     let fragments;
-    Fragment.list().then(rows => {
-        fragments = rows;
-    })
-    .then(() => {
-        res.render('index', {
-            fragments,
+    let works;
+    Fragment.list({})
+        .then(rows => fragments = rows)
+        .then(() => Work.list())
+        .then(rows => works = rows)
+        .then(() => {
+            res.render('index', {
+                cacheBuster: CACHE_BUSTER,
+                fragments: escapeData(fragments),
+                works: escapeData(works),
+            });
         });
-    });
 });
 
 app.listen(port);

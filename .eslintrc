@@ -4,6 +4,9 @@
     "node": true,
     "es6": true
   },
+  "extends": [
+    "plugin:vue/recommended"
+  ],
   "globals": {
     "module": true,
     "require": true,
@@ -11,7 +14,9 @@
     "global": true,
     "process": true
   },
-  "parser": "babel-eslint",
+  "parserOptions": {
+    "parser": "babel-eslint",
+  },
   "rules": {
     ###############################################################################################
     # ARRAYS <https://github.com/thenerdery/javascript-standards#arrays>

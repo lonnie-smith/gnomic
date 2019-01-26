@@ -1,9 +1,17 @@
+# Misc
+.DS_Store
+._.DS_Store
+
 # ignored env overrides
 env/local.env
 
 # dependencies
 node_modules
+npm-debug.log
 
 # database
 devDb.sqlite3
 devDb.sqlite3-journal
+
+# front-end build output
+server/static
