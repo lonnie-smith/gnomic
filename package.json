@@ -8,7 +8,7 @@
     "scripts": {
         "knex": "knex",
         "import": "node db/import/index.js",
-        "dev": "NODE_ENV=development nodemon --watch ./app --watch ./db ./app/server.js"
+        "dev": "NODE_ENV=development nodemon --watch ./app --watch ./db ./app/app.js"
     },
     "dependencies": {
         "body-parser": "1.18.3",
