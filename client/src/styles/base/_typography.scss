@@ -1,0 +1,58 @@
+$FONT_SERIF: 'LibreBaskerville', 'Georgia', 'Times', serif;
+$FONT_SANS: 'NeueMontreal', 'Helvetica Neue', 'Helvetica', sans-serif;
+
+$FONT_SIZE_DEFAULT: 18px;
+$FONT_SIZE_SMALL: 13px;
+$FONT_SIZE_MEDIUM: 24px;
+$FONT_SIZE_LARGE: 36px;
+
+$LINE_HEIGHT_DEFAULT: 2;
+
+@font-face {
+    font-family: "LibreBaskerville";
+    src: url("/assets/media/fonts/librebaskerville-bold.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "LibreBaskerville";
+    src: url("/assets/media/fonts/librebaskerville-italic.woff") format("woff");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "LibreBaskerville";
+    src: url("/assets/media/fonts/librebaskerville-regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "NeueMontreal";
+    src: url("/assets/media/fonts/neuemontreal-bold.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "NeueMontreal";
+    src: url("/assets/media/fonts/neuemontreal-bolditalic.woff") format("woff");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "NeueMontreal";
+    src: url("/assets/media/fonts/neuemontreal-light.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "NeueMontreal";
+    src: url("/assets/media/fonts/neuemontreal-lightitalic.woff") format("woff");
+    font-weight: normal;
+    font-style: italic;
+}
