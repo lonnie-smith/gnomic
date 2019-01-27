@@ -1,5 +1,8 @@
 <template>
-    <router-link :to="path">
+    <router-link
+        :to="path"
+        class="link"
+    >
         <slot />
     </router-link>
 </template>

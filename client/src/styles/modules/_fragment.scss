@@ -1,0 +1,52 @@
+.fragment {
+    font-family: $FONT_SERIF;
+    font-style: italic;
+    line-height: $LINE_HEIGHT_DEFAULT;
+    margin: 0 2em;
+}
+
+.fragment__content {
+    & blockquote {
+        font-style: normal;
+        margin: 0 -2em;
+    }
+}
+
+.fragment__title {
+    font-family: $FONT_SANS_SC;
+    font-weight: 600;
+    font-size: $FONT_SIZE_LARGE;
+    color: $COLOR_ACCENT_PRIMARY;
+    letter-spacing: 2px;
+    line-height: 2;
+}
+
+.fragment__byline {
+    color: $COLOR_ACCENT_SECONDARY;
+    font-family: $FONT_SANS_SC;
+}
+
+.fragment__byline__author {
+}
+
+.fragment__byline__year {
+
+}
+
+.fragment__tags {
+    font-style: normal;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    font-family: $FONT_SANS_SC;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: $FONT_SIZE_SMALL;
+
+    & > * {
+        margin: 0 1em;
+    }
+}

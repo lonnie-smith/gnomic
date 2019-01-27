@@ -1,7 +1,10 @@
 <template>
-    <div>
-        <div v-html="fragment.content" />
-        <ul>
+    <div class="fragment">
+        <div
+            class="fragment__content"
+            v-html="fragment.content"
+        />
+        <ul class="fragment__tags">
             <li
                 v-for="tag of tags"
                 :key="tag.id"
@@ -35,7 +38,8 @@ export default {
                 .toLocaleDateString();
         },
         tags() {
-            const author = `${this.fragment.work.authorFirstName} ${this.fragment.work.authorLastName}`;
+            const author = `${this.fragment.work.authorFirstName}`
+                + ` ${this.fragment.work.authorLastName}`;
             return this.fragment.tags.filter(tag => {
                 if (tag.tag === author
                     || tag.tag === this.fragment.work.title) {
@@ -45,5 +49,5 @@ export default {
             });
         },
     },
-}
+};
 </script>

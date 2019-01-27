@@ -1,0 +1,9 @@
+.link {
+    color: $COLOR_ACCENT_SECONDARY;
+    text-decoration: none;
+
+    &:hover {
+        color: $COLOR_ACCENT_SECONDARY_DARK;
+        border-bottom: 1px solid $COLOR_ACCENT_PRIMARY;
+    }
+}

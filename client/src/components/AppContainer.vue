@@ -1,13 +1,15 @@
 <template>
-    <div>
-        <nav>
+    <div class="pageGrid">
+        <nav class="pageGrid__header">
             <router-link to="/chronology">Chronology</router-link>
             <router-link to="/works">Works</router-link>
             <router-link to="/topics">Topics</router-link>
         </nav>
-        <main>
-            <router-view></router-view>
+        <nav class="pageGrid__sidebarLeft" />
+        <main class="pageGrid__body">
+            <router-view />
         </main>
+        <nav class="pageGrid__sidebarRight" />
     </div>
 </template>
 
@@ -32,7 +34,7 @@ const routes = [
         component: Fragments,
         props: route => {
             return { ...route.query };
-        }
+        },
     },
 ];
 
