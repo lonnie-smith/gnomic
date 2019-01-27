@@ -1,38 +1,49 @@
 <template>
     <div>
-        CHRONOLOGY
-        <ol>
-            <li
-                v-for="fragment of fragments"
-                :key="fragment.id"
-            >
-                <gnomic-fragment :fragment="fragment" />
-            </li>
-        </ol>
+        <section
+            v-for="(group, index) of compositeFragments"
+            :key="index">
+            <gnomic-composite-fragment
+                :fragments="group"
+            />
+        </section>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import { sortBy } from 'lodash';
+
 import { store, mutations, actions } from '../scripts/store';
-import Fragment from './Fragment.vue';
+import CompositeFragment from './CompositeFragment.vue';
 
 export default {
     store,
     components: {
-        'gnomic-fragment': Fragment,
+        'gnomic-composite-fragment': CompositeFragment,
     },
     computed: {
         ...mapState({
-            fragments: state => {
-                return state.fragmentOrder.map(id => {
-                    return state.fragments[id];
+            compositeFragments: state => {
+                const fragments = sortBy(
+                    Object.values(state.fragments), ['date']);
+                const groups = [];
+                const groupDict = {};
+                fragments.forEach(fragment => {
+                    let groupIndex = groupDict[fragment.work.id];
+                    let group;
+                    if (groupIndex != null) {
+                        group = groups[groupIndex]
+                    } else {
+                        group = [];
+                        groups.push(group);
+                        groupDict[fragment.work.id] = groups.length - 1;
+                    }
+                    group.push(fragment);
                 });
+                return groups;
             },
         }),
-    },
-    created() {
-        console.log('FRAGMENTS', this.fragments);
     },
 };
 </script>
