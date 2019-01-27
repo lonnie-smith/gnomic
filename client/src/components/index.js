@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import AppContainer from './AppContainer/AppContainer.vue';
+import AppContainer from './AppContainer.vue';
 
 const components = {
     'gnomic-app-container': AppContainer,
