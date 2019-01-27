@@ -19,6 +19,24 @@
   },
   "rules": {
     ###############################################################################################
+    # VUE
+    ###############################################################################################
+
+    "vue/html-indent": ["error", 4],
+    "vue/html-closing-bracket-newline": ["error", {
+      "singleline": "never",
+      "multiline": "always",
+    }],
+    "vue/html-self-closing": ["error", {
+      "html": {
+        "void": "always",
+      }
+    }],
+    "vue/html-closing-bracket-spacing": ["error", {
+      "selfClosingTag": "always",
+    }],
+
+    ###############################################################################################
     # ARRAYS <https://github.com/thenerdery/javascript-standards#arrays>
     ###############################################################################################
 
