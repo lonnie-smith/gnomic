@@ -30,7 +30,7 @@ module.exports = class Tag extends BaseModel {
             .select('tags.id',
                 'tags.tag',
                 'tags.type')
-            .groupBy('tags.type');
+            .orderBy('tags.type');
     }
 
     static async list() {

@@ -34,8 +34,10 @@ app.get('/', (req, res) => {
         .then(rows => fragments = rows)
         .then(() => Work.list())
         .then(rows => works = rows)
+        .then(() => Tag.list())
         .then(rows => tags = rows)
         .then(() => {
+            console.log(tags.length)
             res.render('index', {
                 cacheBuster: CACHE_BUSTER,
                 fragments: escapeData(fragments.map(f => f.api)),
