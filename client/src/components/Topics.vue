@@ -37,7 +37,6 @@ export default {
                 const groups = [];
                 const dict = {};
                 const tags = sortBy(state.tags, ['type', 'tag']);
-                console.log(tags);
                 tags.forEach(tag => {
                     const index = dict[tag.type];
                     let group;
