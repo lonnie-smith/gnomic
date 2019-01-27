@@ -5,19 +5,30 @@
                 v-for="(works, index) of authorGroups"
                 :key="index"
             >
-                <span>
-                    {{ works[0].authorFirstName }}
-                    {{ works[0].authorLastName }}
-                </span>
+                <gnomic-fragments-link
+                    :query="{
+                        author: `${works[0].authorLastName}, ${works[0].authorFirstName}`
+                    }"
+                >
+                    <span>
+                        {{ works[0].authorFirstName }}
+                        {{ works[0].authorLastName }}
+                    </span>
+                </gnomic-fragments-link>
+
                 <ul>
                     <li
                         v-for="work of works"
                         :key="work.id"
                     >
-                        <span>{{ work.title }}</span>
-                        <span v-if="work.publicationYear">
-                            ({{ work.publicationYear }})
-                        </span>
+                        <gnomic-fragments-link
+                            :query="{ work: work.id }"
+                        >
+                            <span>{{ work.title }}</span>
+                            <span v-if="work.publicationYear">
+                                ({{ work.publicationYear }})
+                            </span>
+                        </gnomic-fragments-link>
                     </li>
                 </ul>
             </li>
@@ -29,9 +40,13 @@
 import { mapState } from 'vuex';
 import { sortBy } from 'lodash';
 import { store, mutations, actions } from '../../scripts/store';
+import FragmentsLink from '../FragmentsLink.vue';
 
 export default {
     store,
+    components: {
+        'gnomic-fragments-link': FragmentsLink,
+    },
     computed: {
         ...mapState({
             authorGroups: state => {

@@ -1,10 +1,16 @@
 <template>
     <div>
         <h2>
-            <span>
-                {{ fragments[0].work.authorFirstName }}
-                {{ fragments[0].work.authorLastName }}
-            </span>
+            <gnomic-fragments-link
+                :query="{
+                    author: `${fragments[0].work.authorLastName}, ${fragments[0].work.authorFirstName}`
+                }"
+            >
+                <span>
+                    {{ fragments[0].work.authorFirstName }}
+                    {{ fragments[0].work.authorLastName }}
+                </span>
+            </gnomic-fragments-link>
             <span>
                 {{ fragments[0].work.title }}
                 <span v-if="fragments[0].work.publicationYear">
@@ -19,7 +25,7 @@
         >
             <gnomic-fragment
                 :fragment="fragment"
-                :show-work="false" />
+            />
             <hr />
         </div>
     </div>
@@ -27,10 +33,12 @@
 
 <script>
 import Fragment from './Fragment.vue';
+import FragmentsLink from './FragmentsLink.vue';
 
 export default {
     components: {
         'gnomic-fragment': Fragment,
+        'gnomic-fragments-link': FragmentsLink,
     },
     props: {
         fragments: {

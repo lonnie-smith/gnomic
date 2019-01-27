@@ -10,7 +10,11 @@
                     v-for="tag of tagGroup.tags"
                     :key="tag.id"
                 >
-                    <span>{{ tag.tag }}</span>
+                    <gnomic-fragments-link
+                        :query="{ tag: tag.tag }"
+                    >
+                        {{ tag.tag }}
+                    </gnomic-fragments-link>
                 </li>
             </ul>
         </section>
@@ -21,6 +25,7 @@
 import { mapState } from 'vuex';
 import { sortBy } from 'lodash';
 import { store, mutations, actions } from '../../scripts/store';
+import FragmentsLink from '../FragmentsLink.vue';
 
 const TAG_TYPE_MAP = {
     person: 'People',
@@ -31,6 +36,9 @@ const TAG_TYPE_MAP = {
 
 export default {
     store,
+    components: {
+        'gnomic-fragments-link': FragmentsLink,
+    },
     computed: {
         ...mapState({
             tagGroups: state => {

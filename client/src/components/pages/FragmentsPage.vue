@@ -29,8 +29,8 @@ export default {
             type: String, // last, first
             'default': null,
         },
-        workId: {
-            type: Number,
+        work: {
+            type: String,
             'default': null,
         },
     },
@@ -50,8 +50,8 @@ export default {
                                 return false;
                             }
                         }
-                        if (this.workId) {
-                            if (fragment.work.id !== this.workId) {
+                        if (this.work) {
+                            if (fragment.work.id !== parseInt(this.work, 10)) {
                                 return false;
                             }
                         }
