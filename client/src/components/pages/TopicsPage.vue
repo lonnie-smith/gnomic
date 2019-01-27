@@ -20,7 +20,7 @@
 <script>
 import { mapState } from 'vuex';
 import { sortBy } from 'lodash';
-import { store, mutations, actions } from '../scripts/store';
+import { store, mutations, actions } from '../../scripts/store';
 
 const TAG_TYPE_MAP = {
     person: 'People',

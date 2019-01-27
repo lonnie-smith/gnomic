@@ -8,8 +8,8 @@
 import { mapState } from 'vuex';
 import { sortBy } from 'lodash';
 
-import { store, mutations, actions } from '../scripts/store';
-import FragmentList from './FragmentList.vue';
+import { store, mutations, actions } from '../../scripts/store';
+import FragmentList from '../FragmentList.vue';
 
 export default {
     store,

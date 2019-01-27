@@ -16,15 +16,24 @@ import { mapMutations } from 'vuex';
 import VueRouter from 'vue-router';
 
 import { store, actions, mutations } from '../scripts/store';
-import Chronology from './Chronology.vue';
-import Works from './Works.vue';
-import Topics from './Topics.vue';
+import Chronology from './pages/ChronologyPage.vue';
+import Works from './pages/WorksPage.vue';
+import Topics from './pages/TopicsPage.vue';
+import Fragments from './pages/FragmentsPage.vue';
 
 const routes = [
     { path: '/', redirect: '/chronology' },
-    { path: '/chronology', component: Chronology, props: true },
+    { path: '/chronology', component: Chronology },
     { path: '/works', component: Works },
     { path: '/topics', component: Topics },
+    { path: '/fragment/:slug', component: Fragments, props: true },
+    {
+        path: '/fragments',
+        component: Fragments,
+        props: route => {
+            return { ...route.query };
+        }
+    },
 ];
 
 const router = new VueRouter({
