@@ -21,6 +21,23 @@ module.exports = class Tag extends BaseModel {
         };
     }
 
+    static _fromRows(rows) {
+        return rows.map(row => new Tag(row));
+    }
+
+    static get query() {
+        return db.from('tags')
+            .select('tags.id',
+                'tags.tag',
+                'tags.type')
+            .groupBy('tags.type');
+    }
+
+    static async list() {
+        return Tag.query
+            .then(rows => Tag._fromRows(rows));
+    }
+
     async save(currentTransaction = null) {
         return super.save({
             tag: this.tag,

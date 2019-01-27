@@ -1,6 +1,8 @@
 export const defaultState = {
-    fragments: {},
     fragmentOrder: [],
+    fragments: {},
+    tagOrder: [],
+    tags: {},
     workOrder: [],
     works: {},
 };

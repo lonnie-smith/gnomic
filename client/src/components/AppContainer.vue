@@ -44,14 +44,20 @@ export default {
             type: Array,
             required: true,
         },
+        tags: {
+            type: Array,
+            required: true,
+        }
     },
     created() {
         this.setFragments(this.fragments);
+        this.setTags(this.tags);
         this.setWorks(this.works);
     },
     methods: {
         ...mapMutations({
             setFragments: mutations.SET_FRAGMENTS,
+            setTags: mutations.SET_TAGS,
             setWorks: mutations.SET_WORKS,
         }),
     },

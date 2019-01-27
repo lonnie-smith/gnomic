@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 export const types = {
     SET_FRAGMENTS: 'setFragments',
+    SET_TAGS: 'setTags',
     SET_WORKS: 'setWorks',
 };
 
@@ -11,6 +12,10 @@ export const mutations = {
 
     [types.SET_WORKS](state, worksArray) {
         setWithOrder(state, worksArray, 'works', 'workOrder');
+    },
+
+    [types.SET_TAGS](state, tagsArray) {
+        setWithOrder(state, tagsArray, 'tags', 'tagOrder');
     },
 };
 
