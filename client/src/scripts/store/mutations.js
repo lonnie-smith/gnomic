@@ -6,15 +6,15 @@ export const types = {
 
 export const mutations = {
     [types.SET_FRAGMENTS](state, fragmentsArray) {
-        setWithDict(state, fragmentsArray, 'fragments', 'fragmentsOrder');
+        setWithOrder(state, fragmentsArray, 'fragments', 'fragmentOrder');
     },
 
     [types.SET_WORKS](state, worksArray) {
-        setWithDict(state, worksArray, 'works', 'worksOrder');
+        setWithOrder(state, worksArray, 'works', 'workOrder');
     },
 };
 
-function setWithDict(state, array, propertyName, orderName) {
+function setWithOrder(state, array, propertyName, orderName) {
     const order = [];
     const dict = {};
     array.forEach(item => {

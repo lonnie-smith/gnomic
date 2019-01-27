@@ -22,13 +22,14 @@ import Topics from './Topics.vue';
 
 const routes = [
     { path: '/', redirect: '/chronology' },
-    { path: '/chronology', component: Chronology },
+    { path: '/chronology', component: Chronology, props: true },
     { path: '/works', component: Works },
     { path: '/topics', component: Topics },
 ];
 
 const router = new VueRouter({
     routes,
+    mode: 'hash',
 });
 
 export default {
@@ -51,7 +52,7 @@ export default {
     methods: {
         ...mapMutations({
             setFragments: mutations.SET_FRAGMENTS,
-            setWorks: mutations.SET_FRAGMENTS,
+            setWorks: mutations.SET_WORKS,
         }),
     },
 };

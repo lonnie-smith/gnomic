@@ -37,7 +37,7 @@ module.exports = class Work extends BaseModel {
     static get query() {
         return db.from('works')
             // .leftJoin('fragments', 'works.id', 'fragments.workId')
-            .select('works.id as workId',
+            .select('works.id',
                 'works.authorLastName',
                 'works.authorFirstName',
                 'works.publicationYear',
