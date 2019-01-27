@@ -30,6 +30,10 @@ module.exports = class Work extends BaseModel {
         };
     }
 
+    static _fromRows(rows) {
+        return rows.map(row => new Work(row));
+    }
+
     static get query() {
         return db.from('works')
             // .leftJoin('fragments', 'works.id', 'fragments.workId')
@@ -39,11 +43,12 @@ module.exports = class Work extends BaseModel {
                 'works.publicationYear',
                 'works.title',
                 'works.url',
-                );
+            );
     }
 
     static async list() {
-        return Work.query;
+        return Work.query
+            .then(rows => Work._fromRows(rows));
     }
 
     async save(currentTransaction = null) {

@@ -11,7 +11,9 @@ html
 body
     div(id="appRoot")
         gnomic-app-container(
-            :init-data!=`${fragments}`)
+            :fragments!=`${fragments}`
+            :works!=`${works}`
+        )
 
     script(src=`/assets/scripts/main.js?v=${cacheBuster}`)
 

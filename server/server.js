@@ -79,8 +79,8 @@ app.get('/', (req, res) => {
         .then(() => {
             res.render('index', {
                 cacheBuster: CACHE_BUSTER,
-                fragments: escapeData(fragments),
-                works: escapeData(works),
+                fragments: escapeData(fragments.map(f => f.api)),
+                works: escapeData(works.map(w => w.api)),
             });
         });
 });
