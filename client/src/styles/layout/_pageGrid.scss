@@ -1,21 +1,49 @@
 .pageGrid {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
     display: grid;
-    grid-template-columns: 25%, 50%, 25%;
-    grid-template-rows: 100px, 100fr;
+    grid-template-columns: 25% 50% 25%;
+    grid-template-rows: auto;
 }
 
 .pageGrid__header {
-
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 2em;
+    border-bottom: 1px solid red;
+    // font-family: 
+    & > * {
+        margin: 0 1em;
+    }
 }
 
 .pageGrid__sidebarLeft {
-
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
 
 .pageGrid__body {
-    
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    overflow-y: auto;
+    padding-top: 2em;
 }
 
-.pageGrid__sidebarRight {
-
-}
+// .pageGrid__sidebarRight {
+//     grid-column-start: 3;
+//     grid-column-end: 4;
+//     grid-row-start: 2;
+//     grid-row-end: 2;
+// }

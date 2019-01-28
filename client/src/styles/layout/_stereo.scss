@@ -1,0 +1,12 @@
+.stereo {
+    display: flex;
+    flex-direction: row;
+    
+    & > * {
+        flex-grow: 0;
+    }
+
+    & > *:nth-last-child(2) {
+        flex-grow: 1;
+    }
+}

@@ -1,10 +1,10 @@
 <template>
-    <div class="fragment">
+    <div class="fragment__fragmentList__item">
         <div
-            class="fragment__content"
+            class="fragment__fragmentList__item__content"
             v-html="fragment.content"
         />
-        <ul class="fragment__tags">
+        <ul class="fragment__fragmentList__item__tags">
             <li
                 v-for="tag of tags"
                 :key="tag.id"

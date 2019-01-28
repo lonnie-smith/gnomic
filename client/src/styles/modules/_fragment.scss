@@ -1,39 +1,74 @@
 .fragment {
     font-family: $FONT_SERIF;
-    font-style: italic;
     line-height: $LINE_HEIGHT_DEFAULT;
-    margin: 0 2em;
+    // margin: 0 2em;
 }
 
-.fragment__content {
+.fragment__header {
+    background-color: $COLOR_BASE_GREY;
+    padding: 3rem;
+}
+
+.fragment__header__title {
+    font-family: $FONT_SERIF_SC;
+    font-weight: 700;
+    font-size: 42px;
+    color: $COLOR_ACCENT_PRIMARY;
+    letter-spacing: 2.5px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+}
+
+.fragment__header__byline {
+    color: $COLOR_WHITE;
+    font-family: $FONT_SANS_SC;
+}
+
+.fragment__fragmentList {
+    margin: 3rem 2rem 8rem 3rem;
+}
+
+.fragment__fragmentList__item {
+    font-family: $FONT_SERIF;
+    line-height: 1.2;
+}
+
+.fragment__fragmentList__item__content {
+    & * + p {
+        margin-top: 1em;
+    }
+
+    & * + blockquote {
+        margin-top: 2em;
+    }
+
     & blockquote {
-        font-style: normal;
-        margin: 0 -2em;
+        padding: 2em;
+        background-color: rgb(249, 246, 231);
+        margin-bottom: 2em;
+    }
+
+    & ul {
+        list-style-type: disc;
+        margin-left: 1em;
+    }
+
+    & * + ul {
+        margin-top: 1em;
+    }
+
+    & * + li {
+        margin-top: 0.5em;
+    }
+
+    & h1, & h2 {
+        font-family: $FONT_SERIF_SC;
+        font-weight: 800;
+        margin: 1.5rem 0;
     }
 }
 
-.fragment__title {
-    font-family: $FONT_SANS_SC;
-    font-weight: 600;
-    font-size: $FONT_SIZE_LARGE;
-    color: $COLOR_ACCENT_PRIMARY;
-    letter-spacing: 2px;
-    line-height: 2;
-}
-
-.fragment__byline {
-    color: $COLOR_ACCENT_SECONDARY;
-    font-family: $FONT_SANS_SC;
-}
-
-.fragment__byline__author {
-}
-
-.fragment__byline__year {
-
-}
-
-.fragment__tags {
+.fragment__fragmentList__item__tags {
     font-style: normal;
     display: flex;
     flex-direction: row;
@@ -45,6 +80,8 @@
     text-transform: uppercase;
     font-weight: 600;
     font-size: $FONT_SIZE_SMALL;
+
+    margin: 2em 0;
 
     & > * {
         margin: 0 1em;

@@ -1,15 +1,29 @@
 <template>
     <div class="pageGrid">
         <nav class="pageGrid__header">
-            <router-link to="/chronology">Chronology</router-link>
-            <router-link to="/works">Works</router-link>
-            <router-link to="/topics">Topics</router-link>
+            <router-link
+                class="link link--navLink"
+                to="/chronology"
+            >
+                Chronology
+            </router-link>
+            <router-link
+                class="link link--navLink"
+                to="/works"
+            >
+                Works
+            </router-link>
+            <router-link
+                class="link link--navLink"
+                to="/topics"
+            >
+                Topics
+            </router-link>
         </nav>
         <nav class="pageGrid__sidebarLeft" />
         <main class="pageGrid__body">
             <router-view />
         </main>
-        <nav class="pageGrid__sidebarRight" />
     </div>
 </template>
 
@@ -41,6 +55,7 @@ const routes = [
 const router = new VueRouter({
     routes,
     mode: 'hash',
+    linkActiveClass: 'isActive',
 });
 
 export default {

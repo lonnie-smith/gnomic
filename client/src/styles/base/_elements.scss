@@ -1,6 +1,14 @@
 html {
     font-size: $FONT_SIZE_DEFAULT;
-    color: $COLOR_WHITE;
-    background-color: $COLOR_BASE_GREY;
+    color: $COLOR_TEXT_DARK;
+    background-color: $COLOR_WHITE;
     font-family: $FONT_SANS;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }

@@ -7,9 +7,11 @@
 
 // LAYOUT
 @import "layout/_pageGrid";
+@import "layout/_stereo";
 
 // CONTENT
 @import "content/_link";
 
 // MODULES
+@import "modules/_appRoot";
 @import "modules/_fragment";

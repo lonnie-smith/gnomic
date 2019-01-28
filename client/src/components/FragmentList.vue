@@ -28,7 +28,8 @@ export default {
     computed: {
         compositeFragments() {
             const fragments = sortBy(
-                Object.values(this.fragments), ['date']);
+                Object.values(this.fragments), ['date'])
+                .reverse();
             const groups = [];
             const groupDict = {};
             fragments.forEach(fragment => {

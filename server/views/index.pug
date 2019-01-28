@@ -11,7 +11,7 @@ html
         link(rel='stylesheet', media='screen, projection', href=`/assets/styles/main.css?v=${cacheBuster}`)
 
 body
-    div(id="appRoot")
+    div(id="appRoot" class="appRoot")
         gnomic-app-container(
             :fragments!=`${fragments}`
             :works!=`${works}`

@@ -1,9 +1,24 @@
 .link {
-    color: $COLOR_ACCENT_SECONDARY;
+    color: $COLOR_ACCENT_PRIMARY;
     text-decoration: none;
 
     &:hover {
         color: $COLOR_ACCENT_SECONDARY_DARK;
         border-bottom: 1px solid $COLOR_ACCENT_PRIMARY;
+    }
+}
+
+.link--light {
+    color: $COLOR_ACCENT_SECONDARY;
+}
+
+.link--navLink {
+    color: $COLOR_TEXT_DARK;
+    font-size: $FONT_SIZE_MEDIUM;
+    font-family: $FONT_SANS_SC;
+
+    &.isActive {
+        color: $COLOR_ACCENT_PRIMARY;
+        border-bottom: 1px solid $COLOR_ACCENT_SECONDARY_DARK;
     }
 }
