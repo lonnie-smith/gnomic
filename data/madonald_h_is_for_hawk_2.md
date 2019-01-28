@@ -8,13 +8,18 @@ tags:
     - Authenticity
     - T. H. White [person]
     - Cold War
+    - Nature
 ---
+
+# On Cruelty and Animals
 
 > And though abjuring cruelty was White's Word, animals played a curious role in keeping it. Riding out with the Old Surrey and Barstow Hunt, White recorded the first time he saw a kill with distanced fascination. The fox was dug out of a drain where it had taken refuge and thrown to the hounds. They tore it to pieces while a circle of human onlookers "screeched them on." The humans, White thought, were disgusting, their cries "tense, self-conscious, and hysterically animal." But the hounds were not. "The savagery of the hounds," he wrote, "was deep-rooted and terrible, but rang true, so that it was not horrible like that of the human."
 >
 > In this bloody scene, only one man escaped White's revulsion: the huntsman, a red-faced, grave, and gentlemanly figure who stood by the hounds and blew the _mort_ on his hunting horn, the formal act of parting to commemorate the death of the fox. By some strange alchemy--his closeness to the pack, his expert command of them--the huntsman was not horrible. For White, it was a moral magic trick, a way out of his conundrum. By skillfully training a hunting animal, by closely associating with it, you might be allowed to experience all your vital, sincere desires, even your most bloodthirsty ones, in total innocence. You could be true to yourself. (42-3)
 
-Authenticity again, in the account of a researcher experimenting on chaffinches
+# On Authenticity
+
+...in the account of a researcher experimenting on chaffinches
 
 > to try to understand how they learned to sing," raising the birds in isolation to see if they still learn to produce the characteristic songs, "a science soaked deep in Cold War anxieties. The question Thorpe was asking were those of a post-war West, obsessed with identity and frightened of brainwashing. How do you learn who you are? Can allegiances be changed? Can you be trusted? What makes you a chaffinch? Where do you come from?
 

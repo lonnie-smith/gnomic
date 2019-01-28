@@ -10,12 +10,12 @@ tags:
     - Violence
 ---
 
-Some emerging themes
+# Themes
 
 * The natural world. It's tractability or trainability--its scrutability--against the symbolic order of human meanings--torn between the mysticism of _Moby Dick_ and the scientist's mechanical or instrumental kinds of knowing.
 * Identity and authenticity. Temptation to view T.H. White's character as warped, twisted into an unnatural shape by the pressures of suppressing his sadistic (I'm not sure what she means by this, possibly just "cruel") and homosexual desires--but, also, the role of others in fixing us to an identity; grief as an unmooring from the self defined by the lost other; necessity of finding new fathers and new selves.
 
-On nature and the symbolic order
+# On nature and the symbolic order
 
 > When it's fighting a pigeon on your lawn a hawk becomes much larger than life, and bird-book illustrations never match the memory. Here's the sparrowhawk. It's grey, with a black and white barred front, yellow eyes and a long tail. Next to it is the goshawk. This one is also grey, with a black and white barred front, yellow eyes and a long tail ...
 >

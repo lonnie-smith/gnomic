@@ -1,5 +1,5 @@
 ---
-title: "Pond Scum: Henry David Thoreau's Moral Myopia (2015)"
+title: "\"Pond Scum: Henry David Thoreau's Moral Myopia\" (2015)"
 author: Schulz, Kathryn
 url: https://www.newyorker.com/magazine/2015/10/19/pond-scum
 date: 2/6/2016
@@ -8,7 +8,7 @@ tags:
     - Nature
 ---
 
-On nature writing & nature as therapy
+# On nature writing & nature as therapy
 
 Kathryn Schulz's takedown of Thoreau in the _New Yorker_ has it that Thoreau's supposed love of nature is mostly an egotistical misanthropy, a "comprehensive arrogance"--"Thoreau's antipathy towards humanity even encompassed the very idea of civilization," which he views as "a contaminant."
 

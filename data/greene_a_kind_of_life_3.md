@@ -8,6 +8,8 @@ tags:
     - Catholicism [topic]
 ---
 
+# Conversion
+
 Graham Greene's conversion is another instance where the interesting bits seem almost entirely left out. He starts visiting a priest because he is engaged to marry a Catholic and feels he owes it to her to at least have a basic understanding of the faith's tenants, but expects to remain a "dogmatic" atheist.
 
 > I can only remember that in January 1926 I became convinced of the probable existence of something we call God, though now I dislike the word with all its anthropomorphic associations and prefer Chardin's "Noosphere," and my belief never came by way of those unconvincing philosophical arguments which I derided in a short story called "A Visit to Morin." (168)

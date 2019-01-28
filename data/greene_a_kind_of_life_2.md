@@ -9,6 +9,8 @@ tags:
     - Autobiography
 ---
 
+# On Boredom
+
 Graham Greene's character is weirdly opaque. He tormented by an emotion he describes as "boredom," which he treats in adolescence with the "drug” of Russian roulette:
 
 > This was not suicide whatever corners jury might've said: it was a gamble with five chances to one against an inquest. The discovery that it was possible to enjoy again the visible world by risking its total loss was one I was bound to make sooner or later. (130)

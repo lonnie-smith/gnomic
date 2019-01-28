@@ -10,7 +10,7 @@ tags:
     - Mimesis
 ---
 
-The Wild is not a panacea.
+# The Wild is not a panacea.
 
 > I'd thought that to heal my great hurt, I should flee to the wild. It was what people did. The nature books I'd read told me so. So many of them had been  inspired by grief or sadness. ... "Nature, in her green, tranquil woods heals and soothes all afflictions," wrote John Muir. "Earth hath no sorrows that earth cannot heal."
 >

@@ -10,7 +10,7 @@ doImport();
 
 async function doImport() {
     await db.migrate.latest();
-    const paths = glob.sync('./data/sampleData/**/*.md');
+    const paths = glob.sync('./data/**/*.md');
     const slugs = [];
     for (const path of paths) {
         const vfile = await parse(path);
