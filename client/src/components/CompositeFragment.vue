@@ -2,18 +2,23 @@
     <div>
         <div class="fragment__header">
             <h2 class="fragment__header__title">
-                <span class="fragment__header__title">
-                    {{ fragments[0].work.title }}
-                </span>
+                {{ title.title }}
+                <div
+                    v-if="title.subtitle"
+                    class="fragment__header__title__subtitle"
+                >
+                    {{ title.subtitle }}
+                </div>
             </h2>
             <div class="fragment__header__byline">
                 <div class="stereo">
                     <div>
                         <gnomic-fragments-link
-                            class="link--light"
                             :query="{
-                                author: `${fragments[0].work.authorLastName}, ${fragments[0].work.authorFirstName}`
+                                author: `${fragments[0].work.authorLastName}, `
+                                    + `${fragments[0].work.authorFirstName}`
                             }"
+                            class="link--light"
                         >
                             <span>
                                 {{ fragments[0].work.authorFirstName }}
@@ -32,9 +37,9 @@
             </div>
         </div>
         <div
-            class="fragment__fragmentList"
             v-for="fragment of fragments"
             :key="fragment.id"
+            class="fragment__fragmentList"
         >
             <gnomic-fragment
                 :fragment="fragment"
@@ -59,6 +64,14 @@ export default {
         },
     },
     computed: {
+        title() {
+            const title = this.fragments[0].work.title;
+            const titleParts = title.split(/[:]\s+/);
+            if (titleParts.length > 1) {
+                return { title: `${titleParts[0]}:`, subtitle: titleParts[1] };
+            }
+            return { title };
+        },
         dates() {
             let min = Infinity;
             let max = -1 * Infinity;
@@ -70,11 +83,11 @@ export default {
             if (min === max) {
                 return (new Date(min)).toLocaleDateString();
             } else {
-                return (new Date(min)).toLocaleDateString()
+                return `${(new Date(min)).toLocaleDateString()}`
                     + '–'
-                    + (new Date(max)).toLocaleDateString();
+                    + `${(new Date(max)).toLocaleDateString()}`;
             }
-        }
-    }
+        },
+    },
 };
 </script>
