@@ -33,19 +33,13 @@ async function doImport() {
 
     await doCleanup(slugs);
 
-    const dbCt = await db.count('* as count')
-        .from('fragments')
-        .union([
-            db.count('* as count')
-                .from('works'),
-            db.count('* as count')
-                .from('tags'),
-        ]);
+    const fragmentCt = await db.count('* as count').from('fragments');
+    const workCt = await db.count('* as count').from('works');
+    const tagCt = await db.count('* as count').from('tags');
 
-    const [fragments, works, tags] = dbCt;
-    console.log(`Database contains: ${fragments.count} fragments,`
-        + ` ${works.count} works,`
-        + ` ${tags.count} tags`);
+    console.log(`Database contains: ${fragmentCt[0].count} fragments,`
+        + ` ${workCt[0].count} works,`
+        + ` ${tagCt[0].count} tags`);
 
     await db.destroy();
 }
