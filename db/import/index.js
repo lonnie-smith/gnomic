@@ -13,8 +13,20 @@ async function doImport() {
     const paths = glob.sync('./data/**/*.md');
     const slugs = [];
     for (const path of paths) {
-        const vfile = await parse(path);
-        const slug = await store(path, vfile);
+        let vfile;
+        try {
+            vfile = await parse(path);
+        } catch (e) {
+            console.error(`Error parsing ${path}`, e);
+            return;
+        }
+        let slug;
+        try {
+            slug = await store(path, vfile);
+        } catch (e) {
+            console.error(`Error parsing ${path}`, e);
+            return;
+        }
         slugs.push(slug);
     }
     console.log('Imported', paths.length, 'files');
