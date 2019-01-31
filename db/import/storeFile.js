@@ -17,14 +17,14 @@ module.exports = async function(filePath, vfile) {
     const url = getUrl(filePath, vfile);
     const tags = getTags(filePath, vfile)
         .concat(
-        {
-            tag: `${authorName.first} ${authorName.last}`,
-            type: 'person',
-        },
-        {
-            tag: title.title,
-            type: 'work',
-        });
+            {
+                tag: `${authorName.first} ${authorName.last}`,
+                type: 'person',
+            },
+            {
+                tag: title.title,
+                type: 'work',
+            });
 
     const work = new Work({
         authorFirstName: authorName.first,
