@@ -6,7 +6,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { sortBy, find } from 'lodash';
+import { find } from 'lodash';
 
 import { store, mutations, actions } from '../../scripts/store';
 import FragmentList from '../FragmentList.vue';

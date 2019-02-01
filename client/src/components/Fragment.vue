@@ -27,6 +27,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import { sortBy } from 'lodash';
 
 import { store } from '../scripts/store';
 import FragmentsLink from './FragmentsLink.vue';
@@ -58,12 +59,13 @@ export default {
             const author = `${this.work.authorFirstName}`
                 + ` ${this.work.authorLastName}`;
             // NB: don't show the title or author of this work as tags.
-            return this.fragment.tagIds
+            const tags = this.fragment.tagIds
                 .map(tagId => this.allTags[tagId])
                 .filter(tag => {
                     return tag.tag !== author
                         && tag.tag !== this.work.title
                 });
+            return sortBy(tags, ['tag']);
         },
     },
 };
