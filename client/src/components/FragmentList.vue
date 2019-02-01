@@ -46,18 +46,30 @@ export default {
         }),
     },
     watch: {
-        fragments() {
-            this.setCompositeFragments();
-            this.fetchFragments();
+        fragments(newVal, oldVal) {
+            // Fetching triggers a fragments change; test to make sure
+            // that there has been a change that requires rebuilding the page.
+            const newKeys = Object.keys(newVal);
+            if (newKeys.length !== Object.keys(oldVal).length) {
+                for (const id of newKeys) {
+                    if (!oldVal[id]) {
+                        this.setCompositeFragments();
+                        this.fetchFragments();
+                        break;
+                    }
+                }
+            }
         },
-    },
-    created() {
-        this.setCompositeFragments();
-        this.fetchFragments();
     },
     mounted() {
         this.scrollContainer = document.querySelector('.pageGrid__body');
-        this.scrollContainer.addEventListener('scroll', evt => this.scrollHandler());
+        this.setCompositeFragments();
+        this.fetchFragments();
+        this.scrollContainer.addEventListener('scroll', this.scrollHandler);
+    },
+    beforeDestroy() {
+        this.scrollContainer.removeEventListener('scroll', this.scrollHandler);
+        this.scrollToTop();
     },
     methods: {
         ...mapActions({
@@ -79,9 +91,7 @@ export default {
                 .then(() => this.setCompositeFragments());
         },
         setCompositeFragments() {
-            if (this.scrollContainer) {
-                this.scrollContainer.scrollTop = 0;
-            }
+            this.scrollToTop();
             const fragments = sortBy(
                 Object.values(this.fragments), ['date', 'workId'])
                 .reverse();
@@ -112,6 +122,11 @@ export default {
             const atBottom = cont.scrollTop + cont.offsetHeight === cont.scrollHeight;
             if (atBottom && !this.isFetchingFragments) {
                 this.fetchFragments();
+            }
+        },
+        scrollToTop() {
+            if (this.scrollContainer) {
+                this.scrollContainer.scrollTop = 0;
             }
         },
     },
