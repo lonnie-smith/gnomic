@@ -63,7 +63,6 @@ export default {
                     this.dots = dots;
                     this.nextDot++;
                 }
-                console.log(this.dots);
             }
         },
     },

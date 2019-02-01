@@ -47,7 +47,12 @@ const routes = [
         path: '/fragments',
         component: Fragments,
         props: route => {
-            return { ...route.query };
+            return {
+                ...route.query,
+                workId: route.query.workId
+                    ? parseInt(route.query.workId, 10)
+                    : null,
+            };
         },
     },
 ];

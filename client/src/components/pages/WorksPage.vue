@@ -22,7 +22,7 @@
                         :key="work.id"
                     >
                         <gnomic-fragments-link
-                            :query="{ work: work.id }"
+                            :query="{ workId: parseInt(work.id, 10) }"
                         >
                             <span>{{ work.title }}</span>
                             <span v-if="work.publicationYear">

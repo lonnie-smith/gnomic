@@ -23,7 +23,7 @@ export default {
                 path = path + (value
                     ? `${key}=${encodeURIComponent(this.query[key])}`
                     : '');
-            })
+            });
             return path;
         },
     },
