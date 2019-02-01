@@ -35,16 +35,4 @@ router.get('/fragment/:slug', (req, res) => {
         });
 });
 
-router.get('/works', (req, res) => {
-    Work.list()
-        .then(rows => {
-            res.json(rows);
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500);
-            res.send(err);
-        });
-});
-
 module.exports = router;

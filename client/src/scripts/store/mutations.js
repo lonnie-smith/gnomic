@@ -6,26 +6,30 @@ export const types = {
 };
 
 export const mutations = {
-    [types.SET_FRAGMENTS](state, fragmentsArray) {
-        setWithOrder(state, fragmentsArray, 'fragments', 'fragmentOrder');
+    [types.SET_FRAGMENTS](state, fragments) {
+        state.fragments = fragments.reduce((dict, fragment) => {
+            dict[fragment.id] = {
+                ...fragment,
+                date: new Date(fragment.date),
+            };
+            return dict;
+        }, {});
     },
 
-    [types.SET_WORKS](state, worksArray) {
-        setWithOrder(state, worksArray, 'works', 'workOrder');
+    [types.SET_WORKS](state, works) {
+        state.works = works.reduce((dict, work) => {
+            dict[work.id] = {
+                ...work,
+                date: new Date(work.date),
+            };
+            return dict;
+        }, {});
     },
 
-    [types.SET_TAGS](state, tagsArray) {
-        setWithOrder(state, tagsArray, 'tags', 'tagOrder');
+    [types.SET_TAGS](state, tags) {
+        state.tags = tags.reduce((dict, tag) => {
+            dict[tag.id] = tag;
+            return dict;
+        }, {});
     },
 };
-
-function setWithOrder(state, array, propertyName, orderName) {
-    const order = [];
-    const dict = {};
-    array.forEach(item => {
-        order.push(item.id);
-        dict[item.id] = item;
-    });
-    state[propertyName] = dict;
-    state[orderName] = order;
-}

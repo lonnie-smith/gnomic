@@ -73,7 +73,7 @@ export default {
         tags: {
             type: Array,
             required: true,
-        }
+        },
     },
     created() {
         this.setFragments(this.fragments);

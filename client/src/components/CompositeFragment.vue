@@ -15,21 +15,21 @@
                     <div>
                         <gnomic-fragments-link
                             :query="{
-                                author: `${fragments[0].work.authorLastName}, `
-                                    + `${fragments[0].work.authorFirstName}`
+                                author: `${work.authorLastName}, `
+                                    + `${work.authorFirstName}`
                             }"
                             class="link--light"
                         >
                             <span>
-                                {{ fragments[0].work.authorFirstName }}
-                                {{ fragments[0].work.authorLastName }}
+                                {{ work.authorFirstName }}
+                                {{ work.authorLastName }}
                             </span>
                         </gnomic-fragments-link>
                         <span
-                            v-if="fragments[0].work.publicationYear"
+                            v-if="work.publicationYear"
                             class="fragment__header__byline__year"
                         >
-                            ({{ fragments[0].work.publicationYear }})
+                            ({{ work.publicationYear }})
                         </span>
                     </div>
                     <div>{{ dates }}</div>
@@ -43,6 +43,7 @@
         >
             <gnomic-fragment
                 :fragment="fragment"
+                :work="work"
             />
         </div>
     </div>
@@ -62,10 +63,14 @@ export default {
             type: Array,
             required: true,
         },
+        work: {
+            type: Object,
+            required: true,
+        },
     },
     computed: {
         title() {
-            const title = this.fragments[0].work.title;
+            const title = this.work.title;
             const titleParts = title.split(/[:]\s+/);
             if (titleParts.length > 1) {
                 return { title: `${titleParts[0]}:`, subtitle: titleParts[1] };
@@ -76,7 +81,7 @@ export default {
             let min = Infinity;
             let max = -1 * Infinity;
             this.fragments.forEach(fragment => {
-                const date = new Date(fragment.date).valueOf();
+                const date = fragment.date.valueOf();
                 min = Math.min(min, date);
                 max = Math.max(min, date);
             });

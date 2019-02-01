@@ -34,103 +34,69 @@ module.exports = class Fragment extends BaseModel {
         };
     }
 
+    /**
+    * Returns an array of tag objects suitable for sending to front end. 
+    *
+    * @static
+    * @param {Array<any>} rows
+    * @returns {Array<any>}
+    */
     static _fromRows(rows) {
-        const fragmentDict = {};
-        const fragments = [];
+        // NB: collapses tag IDs into array
+        const fragments = {};
         rows.forEach(row => {
-            const fragmentIndex = fragmentDict[row.fragmentId];
-            let fragment;
-            if (!isNaN(fragmentIndex)) {
-                fragment = fragments[fragmentIndex];
-            } else {
-                const work = new Work({
-                    id: row.workId,
-                    authorLastName: row.authorLastName,
-                    authorFirstName: row.authorFirstName,
-                    title: row.title,
-                    url: row.url,
-                    publicationYear: row.publicationYear,
-                });
-                fragment = new Fragment({
-                    id: row.fragmentId,
+            let fragment = fragments[row.id];
+            if (!fragment) {
+                fragment = {
+                    id: row.id,
                     slug: row.slug,
-                    date: row.date,
-                    content: row.content,
-                    work,
-                    tags: [],
-                });
-                fragments.push(fragment);
-                fragmentDict[row.fragmentId] = fragments.length - 1;
+                    date: new Date(row.date),
+                    workId: row.workId,
+                    tagIds: [],
+                };
+                fragments[row.id] = fragment;
             };
-            fragment.tags.push(new Tag({
-                id: row.tagId,
-                tag: row.tag,
-                type: row.type,
-            }));
+            fragment.tagIds.push(row.tagId);
         });
-        return fragments;
+        return Object.values(fragments);
     }
 
-    static get _query() {
+    /**
+    * Fetches an array of all fragments, formatted for return to front end.
+    *
+    * @static
+    * @returns {Promise}
+    */
+    static async list() {
         return db.from('fragments')
             .innerJoin('works', 'fragments.workId', 'works.id')
             .innerJoin('fragmentTags', 'fragments.id', 'fragmentTags.fragmentId')
             .innerJoin('tags', 'fragmentTags.tagId', 'tags.id')
-            .select('fragments.id as fragmentId',
-                'fragments.slug',
-                'fragments.date',
-                'fragments.content',
+            .select('fragments.id as id',
+                'slug',
+                'date',
+                'content',
                 'works.id as workId',
                 'works.authorLastName',
                 'works.authorFirstName',
-                'works.title',
-                'works.url',
-                'works.publicationYear',
                 'tags.id as tagId',
-                'tag',
-                'type',
-            );
-    }
-
-    static async list({
-        work = null,
-        authorFullName = null,
-        tag = null,
-    }) {
-        const query = Fragment._query
-            .orderBy('date', 'desc');
-        if (work) {
-            query.where({ workId: parseInt(work, 10) });
-        }
-        if (authorFullName) {
-            const author = parseAuthor(authorFullName);
-            query.where({
-                authorLastName: author.last,
-                authorFirstName: author.first,
-            });
-        }
-        if (tag) {
-            query.where({
-                tag,
-            });
-        }
-        return query
+            )
             .then(rows => Fragment._fromRows(rows));
     }
 
-    static async find(slug) {
-        return Fragment._query
-            .where({
-                'fragments.slug': slug,
-            })
-            .distinct()
-            .then(rows => {
-                if (rows.length === 0) {
-                    return null;
-                }
-                return Fragment._fromRows(rows)[0];
-            });
-    }
+    // static async find(slug) {
+    //     return Fragment._query
+    //         .where({
+    //             'fragments.slug': slug,
+    //         })
+    //         .distinct()
+    //         .then(rows => {
+    //             if (rows.length === 0) {
+    //                 return null;
+    //             }
+    //             return Fragment._fromRows(rows)[0];
+    //         });
+    // }
 
     async _updateTags(currentTransaction = null) {
         const knex = currentTransaction || db;

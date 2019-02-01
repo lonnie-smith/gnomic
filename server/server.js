@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 
 const api = require('./api');
 const escapeData = require('./util/escapeData');
+const errorMessage = require('./util/errorMessage');
 const Fragment = require('../db/models/fragment');
 const Work = require('../db/models/work');
 const Tag = require('../db/models/tag');
@@ -17,7 +18,10 @@ app.use(bodyParser.json());
 app.set('views', './server/views');
 app.set('view engine', 'pug');
 
-const CACHE_BUSTER = (new Date()).valueOf();
+const WEB_CACHE_BUSTER = (new Date()).valueOf();
+const DATA_CACHE_TIMEOUT = 60 * 1000; // one minute
+let dataCache = null;
+let nextCacheUpdate = null;
 
 app.use('/assets', express.static('server/static/assets', {
     fallthrough: false,
@@ -27,24 +31,40 @@ app.use('/assets', express.static('server/static/assets', {
 app.use('/api', api);
 
 app.get('/', (req, res) => {
-    let fragments;
-    let works;
-    let tags;
-    Fragment.list({})
-        .then(rows => fragments = rows)
-        .then(() => Work.list())
-        .then(rows => works = rows)
-        .then(() => Tag.list())
-        .then(rows => tags = rows)
-        .then(() => {
+    updateData()
+        .then(dataCache => {
             res.render('index', {
-                cacheBuster: CACHE_BUSTER,
-                fragments: escapeData(fragments.map(f => f.api)),
-                works: escapeData(works.map(w => w.api)),
-                tags: escapeData(tags.map(t => t.api)),
+                cacheBuster: WEB_CACHE_BUSTER,
+                ...dataCache,
             });
+        })
+        .catch(err => {
+            res.status(500);
+            if (process.env.DEBUG === 'true') {
+                res.send(errorMessage(err));
+            } else {
+                res.send();
+            }
         });
 });
 
 app.listen(port);
 console.log('Gnomic server started on port', port);
+
+async function updateData() {
+    const now = (new Date());
+    if (dataCache || now > nextCacheUpdate) {
+        const fragments = await Fragment.list();
+        const works = await Work.list();
+        const tags = await Tag.list();
+        dataCache = {
+            fragments: escapeData(fragments),
+            works: escapeData(works),
+            tags: escapeData(tags),
+        };
+        nextCacheUpdate = new Date(now.valueOf() + DATA_CACHE_TIMEOUT);
+        return dataCache;
+    } else {
+        return Promise.resolve(dataCache);
+    }
+}

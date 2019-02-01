@@ -30,24 +30,57 @@ module.exports = class Work extends BaseModel {
         };
     }
 
+    /**
+     * Returns an array of fragment objects suitable for sending to front end.
+     *
+     * @static
+     * @param {Array<any>} rows
+     * @returns {Array<any>}
+     */
     static _fromRows(rows) {
-        return rows.map(row => new Work(row));
+        // NB: we collapse fragmentIds from multiple rows into an array fragmentIds
+        // We also find the latest fragment date and store it as work.date.
+        const works = {};
+        rows.forEach(row => {
+            let work = works[row.id];
+            if (!work) {
+                work = {
+                    id: row.id,
+                    authorFirstName: row.authorFirstName,
+                    authorLastName: row.authorLastName,
+                    publicationYear: row.publicationYear,
+                    title: row.title,
+                    url: row.url,
+                    fragmentIds: [],
+                };
+                works[row.id] = work;
+                const newDate = new Date(row.date);
+                work.date = !work.date || newDate > work.date ? newDate : work.date;
+            }
+            work.fragmentIds.push(row.fragmentId);
+        });
+        return Object.values(works);
     }
 
-    static get query() {
-        return db.from('works')
-            // .leftJoin('fragments', 'works.id', 'fragments.workId')
-            .select('works.id',
-                'works.authorLastName',
-                'works.authorFirstName',
-                'works.publicationYear',
-                'works.title',
-                'works.url',
-            );
-    }
-
+    /**
+     * Fetches a dict of all works, formatted for return to front end.
+     * Keys are work IDs.
+     *
+     * @static
+     * @returns {Promise}
+     */
     static async list() {
-        return Work.query
+        return db.from('works')
+            .innerJoin('fragments', 'works.id', 'fragments.workId')
+            .select('works.id as id',
+                'authorLastName',
+                'authorFirstName',
+                'publicationYear',
+                'title',
+                'url',
+                'fragments.id as fragmentId',
+                'fragments.date as date'
+            )
             .then(rows => Work._fromRows(rows));
     }
 

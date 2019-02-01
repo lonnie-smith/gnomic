@@ -10,32 +10,6 @@ module.exports = class BaseModel {
         return {};
     }
 
-    get api() {
-        return cleanObject(JSON.parse(JSON.stringify(this)));
-
-        function cleanObject(obj) {
-            if (obj == null) {
-                return obj;
-            }
-            if (typeof(obj) !== 'object') {
-                return obj;
-            } else if (Array.isArray(obj)) {
-                return obj.map(item => cleanObject(item));
-            } else {
-                const cleaned = {};
-                Object.getOwnPropertyNames(obj).forEach(key => {
-                    if (key.indexOf('_') !== 0) {
-                        const value = cleanObject(obj[key]);
-                        if (value != null) {
-                            cleaned[key] = value;
-                        }
-                    }
-                });
-                return cleaned;
-            }
-        }
-    }
-
     async _insert(currentTransaction = null) {
         const knex = currentTransaction || db;
         return knex.insert(this._columns)

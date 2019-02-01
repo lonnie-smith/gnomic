@@ -18,10 +18,9 @@ export default {
     },
     computed: {
         ...mapState({
-            fragments: state => {
-                return sortBy(
-                    Object.values(state.fragments), ['date']);
-            },
+            fragments: state => state.fragments,
+            tags: state => state.tags,
+            works: state => state.works,
         }),
     },
 };
