@@ -1,0 +1,18 @@
+.hdg {
+    font-family: $FONT_SANS;
+    padding: 1em 0 1.5em 0;
+    color: $COLOR_TEXT_MEDIUM;
+    letter-spacing: 0.5px;
+
+    
+    & > em {
+        font-family: $FONT_SANS_SC;
+        color: $COLOR_ACCENT_PRIMARY;
+        letter-spacing: 1px;
+        font-weight: 400;
+    }
+}
+
+.hdg__1 {
+    font-size: $FONT_SIZE_XLARGE;
+}

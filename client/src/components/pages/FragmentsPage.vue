@@ -1,7 +1,14 @@
 <template>
-    <gnomic-fragment-list
-        :fragments="filteredFragments"
-    />
+    <div>
+        <h1
+            v-if="header"
+            class="hdg hdg__1"
+            v-html="header"
+        />
+        <gnomic-fragment-list
+            :fragments="filteredFragments"
+        />
+    </div>
 </template>
 
 <script>
@@ -66,11 +73,9 @@ export default {
                                 }
                             }
                             if (!found) {
-                                console.log('no tags found')
                                 return false;
                             }
                         }
-                        console.log('found matching', this.tag)
                         return true;
                     })
                     .reduce((dict, fragment) => {
@@ -79,6 +84,12 @@ export default {
                             [fragment.id]: fragment,
                         };
                     }, {});
+            },
+            title(state) {
+                if (this.workId) {
+                    return state.works[this.workId].title;
+                }
+                return null;
             },
         }),
         authorName() {
@@ -90,6 +101,22 @@ export default {
                 first: names[1],
                 last: names[0],
             };
+        },
+        header() {
+            if (this.workId != null && !this.author && !this.tag) {
+                return null;
+            }
+            let header = 'Fragments';
+            if (this.title) {
+                header = `${header} from <em>${this.title}</em>`;
+            } else if (this.author) {
+                const [last, first] = this.author.split(/,\s+/);
+                header = `${header} from works by <em>${first} ${last}</em>`;
+            }
+            if (this.tag) {
+                header = `${header} tagged <em>${this.tag}</em>`;
+            }
+            return header;
         },
     },
 };
