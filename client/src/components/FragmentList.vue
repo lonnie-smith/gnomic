@@ -45,6 +45,12 @@ export default {
             isFetchingFragments: state => state.isFetchingFragments,
         }),
     },
+    watch: {
+        fragments() {
+            this.setCompositeFragments();
+            this.fetchFragments();
+        },
+    },
     created() {
         this.setCompositeFragments();
         this.fetchFragments();
@@ -73,6 +79,9 @@ export default {
                 .then(() => this.setCompositeFragments());
         },
         setCompositeFragments() {
+            if (this.scrollContainer) {
+                this.scrollContainer.scrollTop = 0;
+            }
             const fragments = sortBy(
                 Object.values(this.fragments), ['date', 'workId'])
                 .reverse();

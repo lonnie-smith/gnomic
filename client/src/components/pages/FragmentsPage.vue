@@ -41,50 +41,16 @@ export default {
             'default': null,
         },
     },
+    data() {
+        return {
+            filteredFragments: {},
+        };
+    },
     computed: {
         ...mapState({
-            filteredFragments(state) {
-                return Object.values(state.fragments)
-                    .filter(fragment => {
-                        if (this.slug) {
-                            if (fragment.slug !== this.slug) {
-                                return false;
-                            }
-                        }
-                        if (this.authorName) {
-                            const work = state.works[fragment.workId];
-                            if (work.authorFirstName !== this.authorName.first
-                                || work.authorLastName !== this.authorName.last) {
-                                return false;
-                            }
-                        }
-                        if (this.workId) {
-                            if (fragment.workId !== this.workId) {
-                                return false;
-                            }
-                        }
-                        if (this.tag) {
-                            const tag = find(state.tags, { tag: this.tag });
-                            let found = false;
-                            for (const tagId of fragment.tagIds) {
-                                if (tagId === tag.id) {
-                                    found = true;
-                                    break;
-                                }
-                            }
-                            if (!found) {
-                                return false;
-                            }
-                        }
-                        return true;
-                    })
-                    .reduce((dict, fragment) => {
-                        return {
-                            ...dict,
-                            [fragment.id]: fragment,
-                        };
-                    }, {});
-            },
+            fragments: state => state.fragments,
+            tags: state => state.tags,
+            works: state => state.works,
             title(state) {
                 if (this.workId) {
                     return state.works[this.workId].title;
@@ -117,6 +83,70 @@ export default {
                 header = `${header} tagged <em>${this.tag}</em>`;
             }
             return header;
+        },
+    },
+    watch: {
+        slug() {
+            this.setFilteredFragments();
+        },
+        tag() {
+            this.setFilteredFragments();
+        },
+        author() {
+            this.setFilteredFragments();
+        },
+        workId() {
+            this.setFilteredFragments();
+        },
+    },
+    mounted() {
+        this.setFilteredFragments();
+        console.log(this.filteredFragments)
+    },
+    methods: {
+        setFilteredFragments() {
+            const filteredFragments = Object.values(this.fragments)
+                .filter(fragment => {
+                    if (this.slug) {
+                        if (fragment.slug !== this.slug) {
+                            return false;
+                        }
+                    }
+                    if (this.authorName) {
+                        const work = this.works[fragment.workId];
+                        if (work.authorFirstName !== this.authorName.first
+                            || work.authorLastName !== this.authorName.last) {
+                            return false;
+                        }
+                    }
+                    if (this.workId) {
+                        if (fragment.workId !== this.workId) {
+                            return false;
+                        }
+                    }
+                    if (this.tag) {
+                        const tag = find(this.tags, { tag: this.tag });
+                        let found = false;
+                        for (const tagId of fragment.tagIds) {
+                            if (tagId === tag.id) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            return false;
+                        }
+                    }
+                    return true;
+                })
+                .reduce((dict, fragment) => {
+                    return {
+                        ...dict,
+                        [fragment.id]: fragment,
+                    };
+                }, {});
+            console.log('filtered', Object.keys(filteredFragments).length);
+            this.filteredFragments = filteredFragments;
         },
     },
 };
