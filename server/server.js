@@ -38,14 +38,7 @@ app.get('/', (req, res) => {
                 ...dataCache,
             });
         })
-        .catch(err => {
-            res.status(500);
-            if (process.env.DEBUG === 'true') {
-                res.send(errorMessage(err));
-            } else {
-                res.send();
-            }
-        });
+        .catch(err => errorMessage(err, res));
 });
 
 app.listen(port);

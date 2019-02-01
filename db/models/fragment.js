@@ -35,7 +35,7 @@ module.exports = class Fragment extends BaseModel {
     }
 
     /**
-    * Returns an array of tag objects suitable for sending to front end. 
+    * Returns an array of tag objects suitable for sending to front end.
     *
     * @static
     * @param {Array<any>} rows
@@ -84,19 +84,65 @@ module.exports = class Fragment extends BaseModel {
             .then(rows => Fragment._fromRows(rows));
     }
 
-    // static async find(slug) {
-    //     return Fragment._query
-    //         .where({
-    //             'fragments.slug': slug,
-    //         })
-    //         .distinct()
-    //         .then(rows => {
-    //             if (rows.length === 0) {
-    //                 return null;
-    //             }
-    //             return Fragment._fromRows(rows)[0];
-    //         });
-    // }
+    /**
+     * Returns a single object like { id, content } suitable for return to front
+     * end.
+     *
+     * @static
+     * @param {number|string} slugOrId
+     * @returns {Promise}
+     */
+    static async getOne(slugOrId) {
+        const query = db.from('fragments')
+            .select('id',
+                'content',
+            )
+            .distinct();
+        if (typeof(slugOrId) === 'number') {
+            query.where('id', slugOrId);
+        } else {
+            query.where('slug', slugOrId);
+        }
+        return query.then(rows => {
+            if (rows.length === 0) {
+                return null;
+            }
+            return rows[0];
+        });
+    }
+
+    /**
+     * Returns array of objects like { id, content } suitable for return to
+     * front end.
+     *
+     * @static
+     * @param {Object} { ids = null, workId = null, authorFullName = null, tag = null }
+     * @returns {Promise}
+     */
+    static async query({ ids = null, workId = null, authorFullName = null, tag = null }) {
+        const query = db.from('fragments')
+            .select('id', 'content');
+        if (ids) {
+            query.whereIn('id', ids);
+        }
+        if (workId) {
+            query.where({ workId });
+        }
+        if (authorFullName) {
+            const { last, first } = parseAuthor(authorFullName);
+            query.innerJoin('works', 'works.id', 'fragments.workId')
+                .where({
+                    'works.authorLastName': last,
+                    'works.authorFirstName': first,
+                });
+        }
+        if (tag) {
+            query.innerJoin('fragmentTags', 'fragmentTags.fragmentId', 'fragments.id')
+                .innerJoin('tags', 'tags.id', 'fragmentTags.tagId')
+                .where({ 'tags.tag': tag });
+        }
+        return query;
+    }
 
     async _updateTags(currentTransaction = null) {
         const knex = currentTransaction || db;

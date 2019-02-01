@@ -14,9 +14,9 @@
 
 <script>
 import { sortBy } from 'lodash';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
-import { store } from '../scripts/store';
+import { store, actions } from '../scripts/store';
 import CompositeFragment from './CompositeFragment.vue';
 
 export default {
@@ -30,11 +30,30 @@ export default {
             required: true,
         },
     },
+    data() {
+        return {
+            compositeFragments: [],
+        };
+    },
     computed: {
         ...mapState({
             works: state => state.works,
         }),
-        compositeFragments() {
+    },
+    created() {
+        this.fetchFragments();
+    },
+    methods: {
+        ...mapActions({
+            fetch: actions.FETCH_FRAGMENTS_CONTENT,
+        }),
+        fetchFragments() {
+            const fragmentIds = Object.keys(this.fragments)
+                .map(id => parseInt(id, 10));
+            this.fetch({ fragmentIds })
+                .then(() => this.getCompositeFragments());
+        },
+        getCompositeFragments() {
             const fragments = sortBy(
                 Object.values(this.fragments), ['date', 'workId'])
                 .reverse();
@@ -55,7 +74,7 @@ export default {
                 }
                 group.fragments.push(fragment);
             });
-            return groups;
+            this.compositeFragments = groups;
         },
     },
 };

@@ -3,6 +3,8 @@ export const types = {
     SET_FRAGMENTS: 'setFragments',
     SET_TAGS: 'setTags',
     SET_WORKS: 'setWorks',
+    FETCH_FRAGMENTS_CONTENT: 'fetchFragmentsContent',
+    FETCHED_FRAGMENTS_CONTENT: 'fetchedFragmentsContent',
 };
 
 export const mutations = {
@@ -31,5 +33,22 @@ export const mutations = {
             dict[tag.id] = tag;
             return dict;
         }, {});
+    },
+
+    [types.FETCH_FRAGMENTS_CONTENT](state) {
+        Object.assign(state, {
+            isFetchingFragments: true,
+            fragmentsFetchError: null,
+        });
+    },
+
+    [types.FETCHED_FRAGMENTS_CONTENT](state, { fragments = [], error = null }) {
+        Object.assign(state, {
+            isFetchingFragments: false,
+            fragmentsFetchError: error,
+        });
+        fragments.forEach(fragment => {
+            state.fragments[fragment.id].content = fragment.content;
+        });
     },
 };

@@ -1,38 +1,35 @@
 const express = require('express');
 const router = express.Router(); /* eslint-disable-line new-cap */
 
+const errorMessage = require('./util/errorMessage');
 const Fragment = require('../db/models/fragment');
-const Work = require('../db/models/work');
-const Tag = require('../db/models/tag');
 
-// query params: work, authorFullName (last, first), tag
+// query params: ids, workId, authorFullName (last, first), tag
 router.get('/fragments', (req, res) => {
-    Fragment.list(req.query)
+    const query = {
+        ...req.query,
+        ids: req.query.ids 
+            ? JSON.parse(decodeURIComponent(req.query.ids))
+            : null,
+    };
+    Fragment.query(query)
         .then(fragments => {
-            res.json(fragments.map(fragment => fragment.api));
+            res.json(fragments);
         })
-        .catch(err => {
-            console.error(err);
-            res.status(500);
-            res.send(err);
-        });
+        .catch(err => errorMessage(err, res));
 });
 
 router.get('/fragment/:slug', (req, res) => {
-    Fragment.find(req.params.slug)
+    Fragment.getOne(req.params.slug || req.params.id)
         .then(fragment => {
             if (fragment) {
                 res.json(fragment.api);
             } else {
                 res.status(404);
-                res.send(`'${req.params.slug}' not found.`);
+                res.send(`'${req.params.slug || req.params.id}' not found.`);
             }
         })
-        .catch(err => {
-            console.error(err);
-            res.status(500);
-            res.send(err);
-        });
+        .catch(err => errorMessage(err, res));
 });
 
 module.exports = router;
