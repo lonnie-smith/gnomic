@@ -6,9 +6,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 3rem auto;
-    align-items: start;
     padding: 0 2rem;
-    box-sizing: border-box;
 }
 
 .pageGrid__header {
