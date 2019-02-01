@@ -1,14 +1,14 @@
 <template>
     <div>
-        <section
-            v-for="(group, index) of compositeFragments"
+        <gnomic-composite-fragment
+            v-for="(group, index) of fetchedCompositeFragments"
             :key="index"
-        >
-            <gnomic-composite-fragment
-                :fragments="group.fragments"
-                :work="group.work"
-            />
-        </section>
+            :fragments="group.fragments"
+            :work="group.work"
+        />
+        <gnomic-loading-indicator
+            :is-loading="isFetchingFragments"
+        />
     </div>
 </template>
 
@@ -18,11 +18,13 @@ import { mapState, mapActions } from 'vuex';
 
 import { store, actions } from '../scripts/store';
 import CompositeFragment from './CompositeFragment.vue';
+import LoadingIndicator from './LoadingIndicator.vue';
 
 export default {
     store,
     components: {
         'gnomic-composite-fragment': CompositeFragment,
+        'gnomic-loading-indicator': LoadingIndicator,
     },
     props: {
         fragments: {
@@ -33,27 +35,44 @@ export default {
     data() {
         return {
             compositeFragments: [],
+            fetchedCompositeFragments: [],
+            scrollContainer: null,
         };
     },
     computed: {
         ...mapState({
             works: state => state.works,
+            isFetchingFragments: state => state.isFetchingFragments,
         }),
     },
     created() {
+        this.setCompositeFragments();
         this.fetchFragments();
+    },
+    mounted() {
+        this.scrollContainer = document.querySelector('.pageGrid__body');
+        this.scrollContainer.addEventListener('scroll', evt => this.scrollHandler());
     },
     methods: {
         ...mapActions({
             fetch: actions.FETCH_FRAGMENTS_CONTENT,
         }),
         fetchFragments() {
-            const fragmentIds = Object.keys(this.fragments)
-                .map(id => parseInt(id, 10));
+            const startIdx = this.fetchedCompositeFragments.length;
+            if (startIdx >= this.compositeFragments.length) {
+                return;
+            }
+            const endIdx = startIdx + 1;
+            const fragmentIds = [];
+            this.compositeFragments.slice(startIdx, endIdx)
+                .forEach(group => {
+                    fragmentIds.push(
+                        ...group.fragments.map(f => parseInt(f.id, 10)));
+                });
             this.fetch({ fragmentIds })
-                .then(() => this.getCompositeFragments());
+                .then(() => this.setCompositeFragments());
         },
-        getCompositeFragments() {
+        setCompositeFragments() {
             const fragments = sortBy(
                 Object.values(this.fragments), ['date', 'workId'])
                 .reverse();
@@ -75,6 +94,16 @@ export default {
                 group.fragments.push(fragment);
             });
             this.compositeFragments = groups;
+            this.fetchedCompositeFragments = groups.filter(compositeFrag => {
+                return compositeFrag.fragments[0].content;
+            });
+        },
+        scrollHandler() {
+            const cont = this.scrollContainer;
+            const atBottom = cont.scrollTop + cont.offsetHeight === cont.scrollHeight;
+            if (atBottom && !this.isFetchingFragments) {
+                this.fetchFragments();
+            }
         },
     },
 };

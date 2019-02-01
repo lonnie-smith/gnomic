@@ -47,8 +47,10 @@ export const mutations = {
             isFetchingFragments: false,
             fragmentsFetchError: error,
         });
+        const newFragments = { ...state.fragments };
         fragments.forEach(fragment => {
-            state.fragments[fragment.id].content = fragment.content;
+            newFragments[fragment.id].content = fragment.content;
         });
+        state.fragments = newFragments;
     },
 };

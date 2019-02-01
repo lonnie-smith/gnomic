@@ -1,7 +1,10 @@
 .fragment {
     font-family: $FONT_SERIF;
     line-height: $LINE_HEIGHT_DEFAULT;
-    // margin: 0 2em;
+}
+
+.fragment--noContent {
+    opacity: 0.5;
 }
 
 .fragment__header {
@@ -30,6 +33,10 @@
 
 .fragment__fragmentList {
     margin: 3rem 2rem 8rem 3rem;
+}
+
+.fragment__fragmentList--empty {
+    min-height: 100px;
 }
 
 .fragment__fragmentList__item {

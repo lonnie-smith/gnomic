@@ -1,5 +1,10 @@
 <template>
-    <div>
+    <section
+        :class="{
+            'fragment--noContent': noContent,
+        }"
+        class="fragment"
+    >
         <div class="fragment__header">
             <h2 class="fragment__header__title">
                 {{ title.title }}
@@ -37,7 +42,12 @@
             </div>
         </div>
         <div
+            v-if="noContent"
+            class="fragment__fragmentList fragment__fragmentList--empty"
+        />
+        <div
             v-for="fragment of fragments"
+            v-else
             :key="fragment.id"
             class="fragment__fragmentList"
         >
@@ -46,7 +56,7 @@
                 :work="work"
             />
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -69,14 +79,6 @@ export default {
         },
     },
     computed: {
-        title() {
-            const title = this.work.title;
-            const titleParts = title.split(/[:]\s+/);
-            if (titleParts.length > 1) {
-                return { title: `${titleParts[0]}:`, subtitle: titleParts[1] };
-            }
-            return { title };
-        },
         dates() {
             let min = Infinity;
             let max = -1 * Infinity;
@@ -92,6 +94,17 @@ export default {
                     + '–'
                     + `${(new Date(max)).toLocaleDateString()}`;
             }
+        },
+        noContent() {
+            return this.fragments[0].content == null;
+        },
+        title() {
+            const title = this.work.title;
+            const titleParts = title.split(/[:]\s+/);
+            if (titleParts.length > 1) {
+                return { title: `${titleParts[0]}:`, subtitle: titleParts[1] };
+            }
+            return { title };
         },
     },
 };
