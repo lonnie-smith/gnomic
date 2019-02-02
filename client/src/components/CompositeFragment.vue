@@ -67,6 +67,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import { sortBy } from 'lodash';
 
 import { store, actions } from '../scripts/store';
 import Fragment from './Fragment.vue';
@@ -99,9 +100,10 @@ export default {
     computed: {
         ...mapState({
             fragments(state) {
-                return this.fragmentIds.map(id => {
+                const fragments = this.fragmentIds.map(id => {
                     return state.fragments[id];
                 });
+                return sortBy(fragments, ['date']);
             },
         }),
         dates() {
