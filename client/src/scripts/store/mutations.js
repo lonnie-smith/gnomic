@@ -35,10 +35,15 @@ export const mutations = {
         }, {});
     },
 
-    [types.FETCH_FRAGMENTS_CONTENT](state) {
+    [types.FETCH_FRAGMENTS_CONTENT](state, fragmentIds) {
+        const newFragments = { ...state.fragments };
+        fragmentIds.forEach(id => {
+            newFragments[id].isFetching = true;
+        });
         Object.assign(state, {
             isFetchingFragments: true,
             fragmentsFetchError: null,
+            fragments: newFragments,
         });
     },
 
@@ -50,6 +55,7 @@ export const mutations = {
         const newFragments = { ...state.fragments };
         fragments.forEach(fragment => {
             newFragments[fragment.id].content = fragment.content;
+            newFragments[fragment.id].isFetching = false;
         });
         state.fragments = newFragments;
     },

@@ -145,7 +145,6 @@ export default {
                         [fragment.id]: fragment,
                     };
                 }, {});
-            console.log('filtered', Object.keys(filteredFragments).length);
             this.filteredFragments = filteredFragments;
         },
     },

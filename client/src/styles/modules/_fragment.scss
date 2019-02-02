@@ -4,11 +4,11 @@
 }
 
 .fragment--noContent {
-    opacity: 0.5;
+    // opacity: 0.5;
 }
 
 .fragment__header {
-    background-color: $COLOR_BASE_GREY;
+    background-color: $COLOR_BASE_DARK;
     padding: 3rem;
 }
 
@@ -36,7 +36,12 @@
 }
 
 .fragment__fragmentList--empty {
-    min-height: 100px;
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: $COLOR_BASE_LIGHT;
 }
 
 .fragment__fragmentList__item {
@@ -55,7 +60,7 @@
 
     & blockquote {
         padding: 2em;
-        background-color: rgb(249, 246, 231);
+        background-color: $COLOR_BASE_LIGHT;
         margin-bottom: 2em;
     }
 

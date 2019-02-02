@@ -1,6 +1,6 @@
 <template>
     <div
-        v-show="isLoading"
+        v-show="isShown"
         class="loadingIndicator"
     >
         <div class="loadingIndicator__dots">
@@ -20,6 +20,10 @@
 
 export default {
     props: {
+        isShown: {
+            type: Boolean,
+            required: true,
+        },
         isLoading: {
             type: Boolean,
             required: true,
@@ -48,11 +52,13 @@ export default {
                 this.interval = setInterval(() => this.tick(), 500);
             } else {
                 clearInterval(this.interval);
+                this.dots = [false, false, false];
             }
         },
         tick() {
             if (!this.isLoading) {
                 clearInterval(this.interval);
+                this.dots = [false, false, false];
             } else {
                 if (this.nextDot >= this.dots.length) {
                     this.dots = [false, false, false];

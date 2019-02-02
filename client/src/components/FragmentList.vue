@@ -1,13 +1,10 @@
 <template>
     <div>
         <gnomic-composite-fragment
-            v-for="(group, index) of fetchedCompositeFragments"
+            v-for="(group, index) of compositeFragments"
             :key="index"
-            :fragments="group.fragments"
+            :fragment-ids="group.fragmentIds"
             :work="group.work"
-        />
-        <gnomic-loading-indicator
-            :is-loading="isFetchingFragments"
         />
     </div>
 </template>
@@ -18,13 +15,11 @@ import { mapState, mapActions } from 'vuex';
 
 import { store, actions } from '../scripts/store';
 import CompositeFragment from './CompositeFragment.vue';
-import LoadingIndicator from './LoadingIndicator.vue';
 
 export default {
     store,
     components: {
         'gnomic-composite-fragment': CompositeFragment,
-        'gnomic-loading-indicator': LoadingIndicator,
     },
     props: {
         fragments: {
@@ -35,8 +30,6 @@ export default {
     data() {
         return {
             compositeFragments: [],
-            fetchedCompositeFragments: [],
-            scrollContainer: null,
         };
     },
     computed: {
@@ -54,7 +47,6 @@ export default {
                 for (const id of newKeys) {
                     if (!oldVal[id]) {
                         this.setCompositeFragments();
-                        this.fetchFragments();
                         break;
                     }
                 }
@@ -62,34 +54,9 @@ export default {
         },
     },
     mounted() {
-        this.scrollContainer = document.querySelector('.pageGrid__body');
         this.setCompositeFragments();
-        this.fetchFragments();
-        this.scrollContainer.addEventListener('scroll', this.scrollHandler);
-    },
-    beforeDestroy() {
-        this.scrollContainer.removeEventListener('scroll', this.scrollHandler);
-        this.scrollToTop();
     },
     methods: {
-        ...mapActions({
-            fetch: actions.FETCH_FRAGMENTS_CONTENT,
-        }),
-        fetchFragments() {
-            const startIdx = this.fetchedCompositeFragments.length;
-            if (startIdx >= this.compositeFragments.length) {
-                return;
-            }
-            const endIdx = startIdx + 1;
-            const fragmentIds = [];
-            this.compositeFragments.slice(startIdx, endIdx)
-                .forEach(group => {
-                    fragmentIds.push(
-                        ...group.fragments.map(f => parseInt(f.id, 10)));
-                });
-            this.fetch({ fragmentIds })
-                .then(() => this.setCompositeFragments());
-        },
         setCompositeFragments() {
             this.scrollToTop();
             const fragments = sortBy(
@@ -105,24 +72,14 @@ export default {
                 } else {
                     group = {
                         work: this.works[fragment.workId],
-                        fragments: [],
+                        fragmentIds: [],
                     };
                     groups.push(group);
                     groupDict[fragment.workId] = groups.length - 1;
                 }
-                group.fragments.push(fragment);
+                group.fragmentIds.push(parseInt(fragment.id, 10));
             });
             this.compositeFragments = groups;
-            this.fetchedCompositeFragments = groups.filter(compositeFrag => {
-                return compositeFrag.fragments[0].content;
-            });
-        },
-        scrollHandler() {
-            const cont = this.scrollContainer;
-            const atBottom = cont.scrollTop + cont.offsetHeight === cont.scrollHeight;
-            if (atBottom && !this.isFetchingFragments) {
-                this.fetchFragments();
-            }
         },
         scrollToTop() {
             if (this.scrollContainer) {

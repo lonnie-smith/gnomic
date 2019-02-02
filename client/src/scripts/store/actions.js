@@ -14,7 +14,7 @@ export const actions = {
         if (idsToFetch.length === 0) {
             return;
         }
-        commit(mutations.FETCH_FRAGMENTS_CONTENT);
+        commit(mutations.FETCH_FRAGMENTS_CONTENT, fragmentIds);
         try {
             const fragments = await api.fetchFragmentsByIds(idsToFetch);
             commit(mutations.FETCHED_FRAGMENTS_CONTENT, {
