@@ -66,10 +66,10 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 import { sortBy } from 'lodash';
 
-import { store, actions } from '../scripts/store';
+import { store, actions, mutations } from '../scripts/store';
 import Fragment from './Fragment.vue';
 import FragmentsLink from './FragmentsLink.vue';
 import LoadingIndicator from './LoadingIndicator.vue';
@@ -105,6 +105,7 @@ export default {
                 });
                 return sortBy(fragments, ['date']);
             },
+            workIdInViewport: state => state.workIdInViewport,
         }),
         dates() {
             let min = Infinity;
@@ -147,6 +148,9 @@ export default {
         ...mapActions({
             fetch: actions.FETCH_FRAGMENTS_CONTENT,
         }),
+        ...mapMutations({
+            setWorkIdInViewport: mutations.SET_WORK_ID_IN_VIEWPORT,
+        }),
         fetchContent() {
             const fragmentIds = this.fragments.map(f => parseInt(f.id, 10));
             this.fetch({ fragmentIds });
@@ -154,6 +158,9 @@ export default {
         onIntersectionChange(entries, observer) {
             if (entries[0].isIntersecting) {
                 this.isVisible = true;
+                if (this.workIdInViewport == null) {
+                    this.setWorkIdInViewport(this.work.id);
+                }
                 if (!this.isLoaded) {
                     const debounce = () => {
                         if (this.isVisible && !this.isFetching) {
@@ -164,6 +171,11 @@ export default {
                 }
             } else {
                 this.isVisible = false;
+                if (this.workIdInViewport == this.work.id) {
+                    this.setWorkIdInViewport(null);
+                }
+
+                this.removeWorkIdFromViewport(this.work.id);
             }
         },
         removeIntersectionObserver() {

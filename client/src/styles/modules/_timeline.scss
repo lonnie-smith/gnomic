@@ -1,0 +1,78 @@
+.timeline {
+    max-height: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+    position: relative;
+    margin: 2rem 2rem 2rem 0;
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 10px;
+        height: 100%;
+        border-right: 2px solid $COLOR_ACCENT_PRIMARY;
+    }
+}
+
+.timeline__yearGroup {}
+
+.timeline__yearGroup__title {
+    font-family: $FONT_SANS_SC;
+    font-size: $FONT_SIZE_MEDIUM;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.timeline__yearGroup__monthGroup {}
+
+.timeline__yearGroup__monthGroup__title {
+    font-size: $FONT_SIZE_DEFAULT;
+    font-weight: 600;
+    font-family: $FONT_SANS_SC;
+    padding-bottom: 4px;
+    padding-left: 8px;
+}
+
+.timeline__yearGroup__monthGroup__list {
+    margin-bottom: 16px;
+    padding-left: 16px;
+}
+
+.timeline__yearGroup__monthGroup__list__item {
+    font-size: $FONT_SIZE_SMALL;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 4px 0;
+    position: relative;
+    cursor: pointer;
+
+    &:hover > span {
+        color: $COLOR_ACCENT_SECONDARY_DARK;
+        border-bottom: 1px solid $COLOR_ACCENT_PRIMARY;
+    }
+
+    &.isActive > span {
+        color: $COLOR_ACCENT_PRIMARY;
+        border-bottom: 1px solid $COLOR_ACCENT_SECONDARY_DARK;
+    }
+}
+
+.timeline__yearGroup__monthGroup__list__item__pip {
+    position: absolute;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: $COLOR_WHITE;
+    border-radius: 100%;
+    border: 2px solid $COLOR_ACCENT_PRIMARY;
+    box-sizing: border-box;
+    top: 0;
+    right: 3px;
+    z-index: 2;
+    :hover > & {
+        background-color: $COLOR_ACCENT_SECONDARY;
+    }
+    .isActive > & {
+        background-color: $COLOR_ACCENT_PRIMARY;
+    }
+}

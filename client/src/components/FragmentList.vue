@@ -1,11 +1,15 @@
 <template>
     <div>
-        <gnomic-composite-fragment
+        <div
             v-for="(group, index) of compositeFragments"
             :key="index"
-            :fragment-ids="group.fragmentIds"
-            :work="group.work"
-        />
+            :ref="`group_${group.work.id}`"
+        >
+            <gnomic-composite-fragment
+                :fragment-ids="group.fragmentIds"
+                :work="group.work"
+            />
+        </div>
     </div>
 </template>
 
@@ -30,6 +34,8 @@ export default {
     data() {
         return {
             compositeFragments: [],
+            scrollContainer: null,
+            scrollListener: null,
         };
     },
     computed: {
@@ -54,7 +60,17 @@ export default {
         },
     },
     mounted() {
+        this.scrollContainer = document.querySelector(
+            '.pageGrid__body');
+        this.scrollListener =
+            event => this.scrollToWork(event.detail.workId);
+        document.addEventListener('gnomic-request-scroll',
+            this.scrollListener);
         this.setCompositeFragments();
+    },
+    beforeDestroy() {
+        document.removeEventListener('gnomic-request-scroll',
+            this.scrollListener);
     },
     methods: {
         setCompositeFragments() {
@@ -85,6 +101,12 @@ export default {
             if (this.scrollContainer) {
                 this.scrollContainer.scrollTop = 0;
             }
+        },
+        scrollToWork(workId) {
+            const el = this.$refs[`group_${workId}`][0];
+            const elTop = el && el.offsetTop;
+            const containerTop = this.scrollContainer.getBoundingClientRect().top;
+            this.scrollContainer.scrollTop = elTop - containerTop;
         },
     },
 };

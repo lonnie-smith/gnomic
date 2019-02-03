@@ -20,9 +20,11 @@
                 Topics
             </router-link>
         </nav>
-        <nav class="pageGrid__sidebarLeft" />
+        <nav class="pageGrid__sidebarLeft">
+            <router-view name="sidebar" />
+        </nav>
         <main class="pageGrid__body">
-            <router-view />
+            <router-view name="main"/>
         </main>
     </div>
 </template>
@@ -36,16 +38,30 @@ import Chronology from './pages/ChronologyPage.vue';
 import Works from './pages/WorksPage.vue';
 import Topics from './pages/TopicsPage.vue';
 import Fragments from './pages/FragmentsPage.vue';
+import Timeline from './Timeline.vue';
 
 const routes = [
     { path: '/', redirect: '/chronology' },
-    { path: '/chronology', component: Chronology },
-    { path: '/works', component: Works },
-    { path: '/topics', component: Topics },
-    { path: '/fragment/:slug', component: Fragments, props: true },
+    {
+        path: '/chronology',
+        components: { main: Chronology, sidebar: Timeline },
+    },
+    {
+        path: '/works',
+        components: { main: Works },
+    },
+    {
+        path: '/topics',
+        components: { main: Topics },
+    },
+    {
+        path: '/fragment/:slug',
+        components: { main: Fragments },
+        props: true,
+    },
     {
         path: '/fragments',
-        component: Fragments,
+        components: { main: Fragments, sidebar: Timeline },
         props: route => {
             return {
                 ...route.query,
