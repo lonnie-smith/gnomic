@@ -1,5 +1,15 @@
 <template>
-    <div class="timeline">
+    <div
+        class="timeline"
+        ref="timelineContainer"
+    >
+        <div
+            :style="{
+                transform: `translateY(${pipPosition}px)`,
+                display: pipPosition < 0 ? 'none' : 'block',
+            }"
+            class="timeline__indicator"
+        />
         <div
             v-for="yearGroup of groupedWorks"
             :key="yearGroup.year"
@@ -22,13 +32,15 @@
                     <li
                         v-for="work of monthGroup.works"
                         :key="work.id"
-                        :class="{ isActive: parseInt(work.id) === parseInt(activeWorkId) }"
                         class="timeline__yearGroup__monthGroup__list__item"
                         role="button"
                         @click="requestScroll($event, work.id)"
                     >
                         <span>{{ workDisplay(work) }}</span>
-                        <div class="timeline__yearGroup__monthGroup__list__item__pip" />
+                        <div
+                            :ref="`pip_${work.id}`"
+                            class="timeline__yearGroup__monthGroup__list__item__pip"
+                        />
                     </li>
                 </ul>
             </div>
@@ -65,16 +77,27 @@ export default {
                     grouped = flatMap(grouped, (workArray, month) => {
                         return {
                             month: parseInt(month, 10),
-                            works: sortBy(workArray, ['date', 'title']).reverse(),
+                            works: sortBy(workArray, ['date', 'id']).reverse(),
                         };
                     });
                     grouped = sortBy(grouped, ['month']).reverse();
                     return grouped;
                 }
             },
-            activeWorkId: state => {
-                console.log(state.workIdInViewport);
-                return state.workIdInViewport;
+            pipPosition(state) {
+                const workId = state.itemInViewport;
+                const pips = this.$refs[`pip_${workId}`];
+                if (pips && pips[0]) {
+                    const pipTop = pips[0]
+                        .getBoundingClientRect()
+                        .top;
+                    const containerTop = this.$refs
+                        .timelineContainer
+                        .getBoundingClientRect()
+                        .top;
+                    return pipTop - containerTop;
+                }
+                return -1000;
             },
         }),
     },

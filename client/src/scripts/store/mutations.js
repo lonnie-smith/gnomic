@@ -3,10 +3,12 @@ export const types = {
     SET_FRAGMENTS: 'setFragments',
     SET_TAGS: 'setTags',
     SET_WORKS: 'setWorks',
-    SET_WORK_ID_IN_VIEWPORT: 'setWorkIdInViewport',
     FETCH_FRAGMENTS_CONTENT: 'fetchFragmentsContent',
     FETCHED_FRAGMENTS_CONTENT: 'fetchedFragmentsContent',
+    SET_ITEM_IN_VIEWPORT: 'setItemInViewport',
 };
+
+const itemsInViewport = [];
 
 export const mutations = {
     [types.SET_FRAGMENTS](state, fragments) {
@@ -61,7 +63,7 @@ export const mutations = {
         state.fragments = newFragments;
     },
 
-    [types.SET_WORK_ID_IN_VIEWPORT](state, workId) {
-        state.workIdInViewport = workId;
+    [types.SET_ITEM_IN_VIEWPORT](state, itemId) {
+        state.itemInViewport = itemId;
     },
 };

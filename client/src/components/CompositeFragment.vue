@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import { sortBy } from 'lodash';
 
 import { store, actions, mutations } from '../scripts/store';
@@ -147,9 +147,8 @@ export default {
     methods: {
         ...mapActions({
             fetch: actions.FETCH_FRAGMENTS_CONTENT,
-        }),
-        ...mapMutations({
-            setWorkIdInViewport: mutations.SET_WORK_ID_IN_VIEWPORT,
+            setItemInViewport: actions.SET_ITEM_IN_VIEWPORT,
+            removeItemInViewport: actions.REMOVE_ITEM_IN_VIEWPORT,
         }),
         fetchContent() {
             const fragmentIds = this.fragments.map(f => parseInt(f.id, 10));
@@ -158,9 +157,12 @@ export default {
         onIntersectionChange(entries, observer) {
             if (entries[0].isIntersecting) {
                 this.isVisible = true;
-                if (this.workIdInViewport == null) {
-                    this.setWorkIdInViewport(this.work.id);
-                }
+                const yOffset = this.$refs.intersectionObserverTarget
+                    .offsetTop;
+                this.setItemInViewport({
+                    yOffset,
+                    itemId: this.work.id,
+                });
                 if (!this.isLoaded) {
                     const debounce = () => {
                         if (this.isVisible && !this.isFetching) {
@@ -171,11 +173,7 @@ export default {
                 }
             } else {
                 this.isVisible = false;
-                if (this.workIdInViewport == this.work.id) {
-                    this.setWorkIdInViewport(null);
-                }
-
-                this.removeWorkIdFromViewport(this.work.id);
+                this.removeItemInViewport({ itemId: this.work.id });
             }
         },
         removeIntersectionObserver() {

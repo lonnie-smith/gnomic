@@ -3,7 +3,11 @@ import { types as mutations } from './mutations';
 
 export const types = {
     FETCH_FRAGMENTS_CONTENT: 'fetchFragmentsContent',
+    REMOVE_ITEM_IN_VIEWPORT: 'removeItemInViewport',
+    SET_ITEM_IN_VIEWPORT: 'setItemInViewport',
 };
+
+let itemsInViewport = {};
 
 export const actions = {
     async [types.FETCH_FRAGMENTS_CONTENT]({ commit, state }, { fragmentIds }) {
@@ -24,4 +28,34 @@ export const actions = {
             commit(mutations.FETCHED_FRAGMENTS_CONTENT, { error });
         }
     },
+
+    [types.SET_ITEM_IN_VIEWPORT]({ commit }, { itemId, yOffset }) {
+        itemsInViewport[itemId] = yOffset;
+        updateItemInViewport(commit);
+    },
+
+    [types.REMOVE_ITEM_IN_VIEWPORT]({ commit }, { itemId }) {
+        delete itemsInViewport[itemId];
+        updateItemInViewport(commit);
+    },
 };
+
+// Set state.itemInViewport to the currently present item in viewport
+// with the lowest yOffset.
+let viewportDebounce = null;
+function updateItemInViewport(commit) {
+    clearTimeout(viewportDebounce);
+    viewportDebounce = setTimeout(() => {
+        const itemId = Object.keys(itemsInViewport)
+            .reduce((minId, id) => {
+                const yOffset = itemsInViewport[id];
+                const minOffset = itemsInViewport[minId];
+                if (minOffset == null || yOffset < minOffset) {
+                    return id;
+                } else {
+                    return minId;
+                }
+            }, null);
+        commit(mutations.SET_ITEM_IN_VIEWPORT, itemId);
+    }, 50);
+}

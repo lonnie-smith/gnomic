@@ -4,5 +4,5 @@ export const defaultState = {
     works: {},
     isFetchingFragments: false,
     fragmentsFetchError: null,
-    workIdInViewport: null,
+    itemInViewport: null,
 };
