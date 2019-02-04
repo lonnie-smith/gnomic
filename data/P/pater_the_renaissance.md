@@ -6,7 +6,7 @@ date: 11/16/16
 tags: 
     - Philosophy of Mind
     - Consciousness
-    - Aestheticism
+    - Aesthetics
     - Buddhism
     - Habit
     - Ethics

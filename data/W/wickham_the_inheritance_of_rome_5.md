@@ -7,6 +7,8 @@ tags:
     - Early Medieval [period]
     - Cultural Capital
     - Literacy
+    - History
+    - Architecture
 ---
 
 # On the Early Arab Period
@@ -15,7 +17,7 @@ Wickham thinks the Islamic empires of the medieval era preserved Roman imperial 
 
 > the early Arab period is crucial for us to confront. The caliphate did not rule any part of Europe before the Arab-Berber invasion of Spain in 711, but it cannot be excluded from a history of the Continent. For a start, it was the Arabs who broke in half the surviving section of the Roman empire in the seventh century, ending for ever its dream of continued Mediterranean hegemony, and forcing it to reinvent itself as the state we call Byzantium ... Secondly, the caliphate was itself built on Roman foundations (as also Sassanian Persian foundations). Notwithstanding the difficulty and unfamiliarity of our narrative sources for it, it arguably preserved the parameters of imperial Roman society more completely than any other part of the post-Roman world, at least in the period up to 750; this is a paradox which it is essential to explore. Thirdly, the caliphate was simply richer and more powerful than any other post-Roman polity. By now it was the Arabs that dominated the Mediterranean. (279-80)
 
-# On Public Space and Political Style in the Islamic World
+# On Architecture and Political Style in the Islamic World
 
 Wickham explains the characteristic narrow streets of medieval islamic cities because mosques and palaces, rather than streets, were the site of political theater:
 

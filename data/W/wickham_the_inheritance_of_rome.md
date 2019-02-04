@@ -8,6 +8,7 @@ tags:
     - Rome
     - Cultural Capital
     - Classics
+    - History
 ---
 
 # On the Classics, the Roman Ruling Class, and Cultural Capital

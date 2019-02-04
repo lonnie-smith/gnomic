@@ -6,6 +6,7 @@ date: 6/19/2011
 tags:
     - Early Medieval [period]
     - Aristocracy
+    - History
 ---
 
 # The Economic Basis of Medieval States

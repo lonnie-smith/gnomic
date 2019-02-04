@@ -6,6 +6,7 @@ date: 6/19/2011
 tags:
     - Early Medieval [period]
     - Religion
+    - History
 ---
 
 # On Miracles
