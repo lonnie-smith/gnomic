@@ -6,6 +6,7 @@ date: 9/2/2007
 tags:
     - Reading
     - Education
+    - Idleness
 ---
 
 # Johnson on Reading by Inclination
