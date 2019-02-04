@@ -9,15 +9,15 @@ exports.up = function(knex, Promise) {
                 table.string('url');
                 table.string('publicationYear');
             })
-            .then(() => {
-                return knex.schema.alterTable('works', table => {
-                    table.unique([
-                        'authorLastName',
-                        'authorFirstName',
-                        'title',
-                    ]);
+                .then(() => {
+                    return knex.schema.alterTable('works', table => {
+                        table.unique([
+                            'authorLastName',
+                            'authorFirstName',
+                            'title',
+                        ]);
+                    });
                 });
-            });
         };
     });
 };
