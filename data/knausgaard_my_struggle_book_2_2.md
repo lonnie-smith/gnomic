@@ -1,5 +1,6 @@
 ---
-title: "My Struggle: Book 2 (2009)"
+title: "My Struggle: Book 2"
+publicationYear: 2009
 author: Knausgaard, Karl Ove
 date: 9/25/2016
 tags:

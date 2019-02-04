@@ -1,5 +1,6 @@
 ---
-title: Abroad (1979)
+title: Abroad
+publicationYear: 1979
 author: Fussell, Paul
 date: 2/13/2016
 tags:

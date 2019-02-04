@@ -1,5 +1,6 @@
 ---
-title: "The Inheritance of Rome: Illuminating the Dark Ages 400-1000 (2009)"
+title: "The Inheritance of Rome: Illuminating the Dark Ages 400-1000"
+publicationYear: 2009
 author: Wickham, Chris
 date: 6/19/2011
 tags:

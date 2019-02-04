@@ -1,5 +1,6 @@
 ---
-title: My Life in Middlemarch (2014)
+title: My Life in Middlemarch
+publicationYear: 2014
 author: Mead, Rebecca
 date: 11/16/16
 tags: 

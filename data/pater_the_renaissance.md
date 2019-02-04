@@ -1,5 +1,6 @@
 ---
-title: The Renaissance (1873)
+title: The Renaissance
+publicationYear: 1873
 author: Pater, Walter
 date: 11/16/16
 tags: 

@@ -1,5 +1,6 @@
 ---
-title: H is for Hawk (2015)
+title: H is for Hawk
+publicationYear: 2015
 author: Macdonald, Helen
 date: 2/6/2016
 tags: 

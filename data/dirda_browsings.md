@@ -1,5 +1,6 @@
 ---
-title: Browsings (2015)
+title: Browsings
+publicationYear: 2015
 author: Dirda, Michael
 date: 10/22/2015
 tags: 

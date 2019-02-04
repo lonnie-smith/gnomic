@@ -1,5 +1,6 @@
 ---
-title: A Sort of Life (1972)
+title: A Sort of Life
+publicationYear: 1972
 author: Greene, Graham
 date: 10/28/2015
 tags: 

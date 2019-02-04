@@ -1,5 +1,6 @@
 ---
-title: Lolly Willowes (1926)
+title: Lolly Willowes
+publicationYear: 1926
 author: Warner, Sylvia Townsend
 date: 10/16/16
 tags:

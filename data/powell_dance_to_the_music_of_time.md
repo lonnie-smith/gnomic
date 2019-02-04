@@ -1,5 +1,6 @@
 ---
-title: "A Dance to the Music of Time: A Question of Upbringing (1951)"
+title: "A Dance to the Music of Time: A Question of Upbringing"
+publicationYear: 1951
 author: Powell, Anthony
 date: 10/23/2015
 tags:

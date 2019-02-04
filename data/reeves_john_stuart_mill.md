@@ -1,5 +1,6 @@
 ---
-title: "John Stuart Mill: Victorian Firebrand (2007)"
+title: "John Stuart Mill: Victorian Firebrand"
+publicationYear: 2007
 author: Reeves, Richard
 date: 02/28/18
 tags:
