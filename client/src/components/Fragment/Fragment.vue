@@ -29,6 +29,7 @@
 import { mapState } from 'vuex';
 import { sortBy } from 'lodash';
 
+import { caseInsensitive } from '../../scripts/util/sortComparators';
 import { store } from '../../scripts/store';
 import FragmentContent from './FragmentContent.vue';
 import FragmentsLink from '../FragmentsLink.vue';
@@ -67,7 +68,7 @@ export default {
                     return tag.tag !== author
                         && tag.tag !== this.work.title
                 });
-            return sortBy(tags, ['tag']);
+            return sortBy(tags, [tag => caseInsensitive(tag.tag)]);
         },
     },
 };

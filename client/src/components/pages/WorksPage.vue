@@ -39,6 +39,7 @@
 <script>
 import { mapState } from 'vuex';
 import { sortBy } from 'lodash';
+import { surname, caseInsensitive, yearString, title } from '../../scripts/util/sortComparators';
 import { store, mutations, actions } from '../../scripts/store';
 import FragmentsLink from '../FragmentsLink.vue';
 
@@ -53,10 +54,10 @@ export default {
                 const groups = [];
                 const dict = {};
                 const works = sortBy(state.works, [
-                    'authorLastName',
-                    'authorFirstName',
-                    'publicationYear',
-                    'title',
+                    work => surname(work.authorLastName),
+                    work => caseInsensitive(work.authorFirstName),
+                    work => yearString(work.publicationYear),
+                    work => title(work.title),
                 ]);
                 works.forEach(work => {
                     const key = `${work.authorFirstName}${work.authorLastName}`;

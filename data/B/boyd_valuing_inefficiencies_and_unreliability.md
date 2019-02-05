@@ -2,7 +2,7 @@
 title: "\"Valuing Inefficiencies and Unreliability\""
 publicationYear: 2007
 url: "http://www.zephoria.org/thoughts/archives/2007/12/14/valuing_ineffic.html"
-author: Boyd, Danah
+author: boyd, danah
 date: 12/18/2007
 tags:
     - Technology
