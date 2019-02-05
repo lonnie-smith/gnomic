@@ -1,19 +1,32 @@
 <template>
     <section
+        ref="intersectionObserverTarget"
         :class="{
             'fragment--noContent': !isLoaded,
         }"
         class="fragment"
-        ref="intersectionObserverTarget"
     >
         <div class="fragment__header">
             <h2 class="fragment__header__title">
-                {{ title.title }}
+                <div class="fragment__header__title__mainTitle">
+                    {{ title.title }}
+                </div>
                 <div
                     v-if="title.subtitle"
                     class="fragment__header__title__subtitle"
                 >
                     {{ title.subtitle }}
+                </div>
+                <div
+                    class="fragment__header__title__link"
+                >
+                    <a
+                        v-if="work.url"
+                        :href="work.url"
+                        target="_blank"
+                    >
+                        link
+                    </a>
                 </div>
             </h2>
             <div class="fragment__header__byline">

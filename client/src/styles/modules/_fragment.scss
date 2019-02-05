@@ -15,15 +15,60 @@
 .fragment__header__title {
     font-family: $FONT_SERIF_SC;
     font-weight: 700;
-    font-size: 42px;
     color: $COLOR_ACCENT_PRIMARY;
     letter-spacing: 2.5px;
     line-height: 1.1;
     margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+}
+
+.fragment__header__title__mainTitle {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    font-size: 42px;
 }
 
 .fragment__header__title__subtitle {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
     font-size: 24px;
+}
+
+.fragment__header__title__link {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    font-family: $FONT_SANS_SC;
+    font-size: $FONT_SIZE_DEFAULT;
+    letter-spacing: 0;
+    text-align: right;
+    font-weight: 400;
+    & > a {
+        color: $COLOR_TEXT_LIGHT;
+        text-decoration: none;
+        margin-right: 1.25em;
+        margin-top: 0.25em;
+        position: relative;
+        &:hover {
+            color: $COLOR_ACCENT_SECONDARY_DARK;
+            border-bottom: 1px solid $COLOR_ACCENT_PRIMARY;
+        }
+        &::after {
+            content: '➝';
+            position: absolute;
+            display: block;
+            right: -1.25em;
+            top: 0.15em;
+        }
+    }
 }
 
 .fragment__header__byline {
