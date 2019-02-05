@@ -67,14 +67,12 @@ function chunkToAccordionNode(chunk) {
         ...chunk.heading,
         data: {
             ...(chunk.heading.data || {}),
-            hProperties: { 'data-accordion-header': true },
         },
     };
     return {
         type: 'accordion',
         data: {
             hName: 'section',
-            hProperties: { 'data-accordion': true },
         },
         children: [
             header,
