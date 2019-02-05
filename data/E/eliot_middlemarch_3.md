@@ -9,6 +9,8 @@ tags:
     - Hope
 ---
 
+# On Hope and Development
+
 The narrator's rumination on Will Ladislaw's rather vague expectations of
 attaining greatness
 

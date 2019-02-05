@@ -16,7 +16,6 @@ tags:
 
 Part spiritual autobiography, part grief memoir; Pagels' careful, plainspoken prose reminds me of Patti Smith's writing in _Just Kids_
 
-
 # On the Cruelty of Orthodox Christian Theology
 
 Pagels struggling with the bone-deep cruelty of the Orthodox Christian theology of "Christ Crucified"
