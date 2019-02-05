@@ -1,8 +1,8 @@
 <template>
     <div class="fragment__fragmentList__item">
-        <div
+        <gnomic-fragment-content
+            :content-html="fragment.content"
             class="fragment__fragmentList__item__content"
-            v-html="fragment.content"
         />
         <ul class="fragment__fragmentList__item__tags">
             <li
@@ -29,12 +29,14 @@
 import { mapState } from 'vuex';
 import { sortBy } from 'lodash';
 
-import { store } from '../scripts/store';
-import FragmentsLink from './FragmentsLink.vue';
+import { store } from '../../scripts/store';
+import FragmentContent from './FragmentContent.vue';
+import FragmentsLink from '../FragmentsLink.vue';
 
 export default {
     store,
     components: {
+        'gnomic-fragment-content': FragmentContent,
         'gnomic-fragments-link': FragmentsLink,
     },
     props: {

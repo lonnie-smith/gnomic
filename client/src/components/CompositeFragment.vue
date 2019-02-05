@@ -70,7 +70,7 @@ import { mapState, mapActions } from 'vuex';
 import { sortBy } from 'lodash';
 
 import { store, actions, mutations } from '../scripts/store';
-import Fragment from './Fragment.vue';
+import Fragment from './Fragment/Fragment.vue';
 import FragmentsLink from './FragmentsLink.vue';
 import LoadingIndicator from './LoadingIndicator.vue';
 
