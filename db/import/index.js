@@ -11,6 +11,7 @@ doImport();
 async function doImport() {
     await db.migrate.latest();
     const paths = glob.sync('./data/**/*.md');
+    // const paths = glob.sync('./data/**/*.md').filter(f => f.indexOf('_for_hawk.md') > 0);
     const slugs = [];
     for (const path of paths) {
         let vfile;
