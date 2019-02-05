@@ -1,6 +1,6 @@
 <script>
 import Vue from 'vue';
-import Accordion from './Accordion.vue';
+import BlockQuote from './BlockQuote.vue';
 
 export default {
     props: {
@@ -12,22 +12,20 @@ export default {
     render(createElement) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(this.contentHtml, 'text/html');
-        const sections = Array.from(doc.querySelectorAll('section'));
-        const children = sections.map(section => {
-            if (section.hasAttribute('data-accordion')) {
-                const headerHtml = section.querySelector('[data-accordion-header]')
-                    .innerHTML;
-                const bodyHtml = Array.from(section.children)
-                    .filter(node => !(node.hasAttribute('data-accordion-header')))
-                    .map(node => node.outerHTML)
-                    .join('');
-                return createElement(Accordion, { props: { headerHtml, bodyHtml } });
-            } else {
-                // return createElement(Accordion, { props: { bodyHtml: section.innerHTML } });
-                return Vue.compile(section.outerHTML);
-            }
-        });
-        return createElement('section', {}, children);
+        const sections = Array.from(doc.querySelectorAll('section'))
+            .map(section => {
+                const sectionChildren = Array.from(section.children).map(child => {
+                    if (child.tagName === 'BLOCKQUOTE') {
+                        const contentHtml = child.innerHTML;
+                        return createElement(BlockQuote, { props: { contentHtml } });
+                    } else {
+                        return createElement(child.tagName,
+                            { domProps: { innerHTML: child.innerHTML } });
+                    }
+                });
+                return createElement('section', {}, sectionChildren);
+            });
+        return createElement('article', {}, sections);
     },
 };
 </script>

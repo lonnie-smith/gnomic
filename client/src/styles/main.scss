@@ -10,12 +10,12 @@
 @import "layout/_stereo";
 
 // CONTENT
+@import "content/_blockQuote";
 @import "content/_link";
 @import "content/_hdg";
 @import "content/_isVisuallyHidden";
 
 // MODULES
-@import "modules/_accordion";
 @import "modules/_appRoot";
 @import "modules/_fragment";
 @import "modules/_loadingIndicator";
