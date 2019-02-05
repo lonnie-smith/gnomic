@@ -1,5 +1,5 @@
 ---
-title: "\"Will the Humanities Save Us?\""
+title: "“Will the Humanities Save Us?”"
 publicationYear: 2008
 url: "https://opinionator.blogs.nytimes.com/2008/01/06/will-the-humanities-save-us/"
 author: Fish, Stanley

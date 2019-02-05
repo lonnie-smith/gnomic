@@ -1,5 +1,5 @@
 ---
-title: "\"In Praise of Idleness\""
+title: "“In Praise of Idleness”"
 publicationYear: 1932
 author: Russell, Bertrand
 date: 06/16/2008

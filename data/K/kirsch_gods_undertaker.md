@@ -1,5 +1,5 @@
 ---
-title: "\"God's Undertaker\""
+title: "“God's Undertaker”"
 publicationYear: 2007
 url: "https://www.newyorker.com/magazine/2007/01/15/gods-undertaker"
 author: Kirsh, Adam

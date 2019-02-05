@@ -1,5 +1,5 @@
 ---
-title: "\"Three Differences between an Academic and an Intellectual: What Happens to the Liberal Arts When They are Kicked Off Campus?\""
+title: "“Three Differences between an Academic and an Intellectual: What Happens to the Liberal Arts When They are Kicked Off Campus?”"
 publicationYear: 1999
 author: Miles, Jack
 date: 1/22/2008

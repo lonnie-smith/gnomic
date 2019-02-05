@@ -1,5 +1,5 @@
 ---
-title: "\"Improving Undergraduate Computer Science Education\""
+title: "“Improving Undergraduate Computer Science Education”"
 publicationYear: 2007
 url: "https://philip.greenspun.com/blog/2007/08/23/improving-undergraduate-computer-science-education/"
 author: Greenspun, Philip

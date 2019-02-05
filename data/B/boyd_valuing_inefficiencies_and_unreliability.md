@@ -1,5 +1,5 @@
 ---
-title: "\"Valuing Inefficiencies and Unreliability\""
+title: "“Valuing Inefficiencies and Unreliability”"
 publicationYear: 2007
 url: "http://www.zephoria.org/thoughts/archives/2007/12/14/valuing_ineffic.html"
 author: boyd, danah

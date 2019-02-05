@@ -1,5 +1,5 @@
 ---
-title: "\"How to Raise a Prodigy: Can Achievement be Engineered?\""
+title: "“How to Raise a Prodigy: Can Achievement be Engineered?”"
 publicationYear: 2018
 author: Gopnik, Adam
 date: 2/10/18

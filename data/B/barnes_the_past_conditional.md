@@ -1,5 +1,5 @@
 ---
-title: "\"The Past Conditional\""
+title: "“The Past Conditional”"
 publicationYear: 2006
 url: "https://www.newyorker.com/magazine/2006/12/25/the-past-conditional"
 author: Barnes, Julian

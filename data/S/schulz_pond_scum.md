@@ -1,5 +1,5 @@
 ---
-title: "\"Pond Scum: Henry David Thoreau's Moral Myopia\""
+title: "“Pond Scum: Henry David Thoreau's Moral Myopia”"
 publicationYear: 2015
 author: Schulz, Kathryn
 url: https://www.newyorker.com/magazine/2015/10/19/pond-scum
