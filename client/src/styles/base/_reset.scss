@@ -89,7 +89,7 @@ video {
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
+    font-family: inherit;
     vertical-align: baseline;
 }
 
@@ -185,4 +185,14 @@ textarea {
 ::-moz-focus-inner {
     border: 0;
     padding: 0;
+}
+
+button {
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+    background-color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
 }

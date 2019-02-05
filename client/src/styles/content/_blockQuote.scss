@@ -1,10 +1,14 @@
 .blockQuote {
-    padding: 2em 2em 1em 2em;
+    position: relative;
+}
+
+.blockQuote__container {
     background-color: $COLOR_BASE_LIGHT;
     margin-bottom: 2em;
-    max-height: 200px;
+    max-height: auto; // set dynamically
     overflow: hidden;
     position: relative;
+
     &::after {
         display: block;
         content: '';
@@ -19,14 +23,46 @@
         background: linear-gradient(
             to bottom,
             rgba(255,255,255,0) 0%,
-            rgba(255,255,255,0) 75%,
-            rgba(255,255,255,1) 100%
+            rgba(255,255,255,0) 40%,
+            $COLOR_BASE_LIGHT 85%,
+            $COLOR_BASE_LIGHT 100%
         );
     }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
     &.isOpen {
-        max-height: none;
+        transition: max-height 100ms ease-in;
         &:after {
             opacity: 0;
+        }
+    }
+
+}
+
+.blockQuote__container__content {
+    padding: 2rem 2rem 1rem 2rem;
+    line-height: $LINE_HEIGHT_COMPACT;
+}
+
+.blockQuote__controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
+    padding-right: 2rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    & > button {
+        font-family: $FONT_SANS;
+        color: $COLOR_TEXT_DARK;
+        &::after {
+            content: '▼';
+            font-size: 0.6em;
         }
     }
 }
