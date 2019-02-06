@@ -8,6 +8,10 @@ const unified = require('unified');
 const vfile = require('to-vfile');
 const yaml = require('yaml').parse;
 
+const addSemanticMarkup = require('./remarkPlugins/addSemanticMarkup');
+const removeFrontmatter = require('./remarkPlugins/removeFrontmatter');
+const fixTypography = require('./remarkPlugins/fixTypography');
+
 module.exports = function(filePath) {
     return new Promise((resolve, reject) => {
         unified()
@@ -19,8 +23,11 @@ module.exports = function(filePath) {
                     marker: '-',
                 },
             ])
-            .use(extract, { yaml: yaml })
+            .use(extract, { yaml })
+            .use(removeFrontmatter)
+            .use(fixTypography)
             .use(html)
+            .use(addSemanticMarkup)
             .process(
                 vfile.readSync(filePath),
                 (err, file) => {
@@ -37,4 +44,4 @@ module.exports = function(filePath) {
                 }
             );
     });
-}
+};

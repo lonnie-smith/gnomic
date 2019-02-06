@@ -101,7 +101,6 @@ export default {
     },
     mounted() {
         this.setFilteredFragments();
-        console.log(this.filteredFragments)
     },
     methods: {
         setFilteredFragments() {

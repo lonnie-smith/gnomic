@@ -31,54 +31,9 @@
 
 <script>
 import { mapMutations } from 'vuex';
-import VueRouter from 'vue-router';
 
 import { store, actions, mutations } from '../scripts/store';
-import Chronology from './pages/ChronologyPage.vue';
-import Works from './pages/WorksPage.vue';
-import Topics from './pages/TopicsPage.vue';
-import Fragments from './pages/FragmentsPage.vue';
-import Timeline from './Timeline.vue';
-import WorkSorter from './WorkSorter.vue';
-
-const routes = [
-    { path: '/', redirect: '/chronology' },
-    {
-        path: '/chronology',
-        components: { main: Chronology, sidebar: Timeline },
-    },
-    {
-        path: '/works',
-        components: { main: Works, sidebar: WorkSorter },
-    },
-    {
-        path: '/topics',
-        components: { main: Topics },
-    },
-    {
-        path: '/fragment/:slug',
-        components: { main: Fragments },
-        props: true,
-    },
-    {
-        path: '/fragments',
-        components: { main: Fragments, sidebar: Timeline },
-        props: route => {
-            return {
-                ...route.query,
-                workId: route.query.workId
-                    ? parseInt(route.query.workId, 10)
-                    : null,
-            };
-        },
-    },
-];
-
-const router = new VueRouter({
-    routes,
-    mode: 'hash',
-    linkActiveClass: 'isActive',
-});
+import { router } from '../scripts/router';
 
 export default {
     store,

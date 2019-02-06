@@ -7,12 +7,12 @@ const Fragment = require('../models/fragment');
 const Tag = require('../models/tag');
 
 const TAG_TYPE_RX = /(.*?)\s+\[(.*)\]/;
-const PUB_YEAR_RX = /(.*?)\s+\((.*?)\)$/;
 
 module.exports = async function(filePath, vfile) {
     const slug = getSlug(filePath);
     const authorName = getAuthor(filePath, vfile);
     const title = getTitle(filePath, vfile);
+    const publicationYear = getPubYear(filePath, vfile);
     const date = getDate(filePath, vfile);
     const url = getUrl(filePath, vfile);
     const tags = getTags(filePath, vfile)
@@ -22,15 +22,15 @@ module.exports = async function(filePath, vfile) {
                 type: 'person',
             },
             {
-                tag: title.title,
+                tag: title,
                 type: 'work',
             });
 
     const work = new Work({
         authorFirstName: authorName.first,
         authorLastName: authorName.last,
-        publicationYear: title.pubYear,
-        title: title.title,
+        publicationYear,
+        title,
         url,
     });
 
@@ -76,13 +76,18 @@ function getTitle(filePath, vfile) {
         && vfile.data.title;
     if (!title) {
         throw new Error(`Missing title metadata in ${filePath}`);
+    } else {
+        return title;
     }
+}
 
-    const match = title.match(PUB_YEAR_RX);
-    if (!match) {
-        return { title };
-    }    else {
-        return { title: match[1], pubYear: match[2] };
+function getPubYear(filePath, vfile) {
+    const yr = vfile.data
+        && vfile.data.publicationYear;
+    if (!yr) {
+        throw new Error(`Missing publication year metadata in ${filePath}`);
+    } else {
+        return yr;
     }
 }
 

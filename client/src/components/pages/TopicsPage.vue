@@ -24,6 +24,8 @@
 <script>
 import { mapState } from 'vuex';
 import { sortBy } from 'lodash';
+
+import { caseInsensitive } from '../../scripts/util/sortComparators';
 import { store, mutations, actions } from '../../scripts/store';
 import FragmentsLink from '../FragmentsLink.vue';
 
@@ -44,7 +46,7 @@ export default {
             tagGroups: state => {
                 const groups = [];
                 const dict = {};
-                const tags = sortBy(state.tags, ['type', 'tag']);
+                const tags = sortBy(state.tags, [tag => caseInsensitive(tag.tag)]);
                 tags.forEach(tag => {
                     const index = dict[tag.type];
                     let group;

@@ -61,13 +61,13 @@ export default {
                 let grouped = groupBy(
                     Object.values(state.works),
                     work => {
-                    return work.date.getFullYear();
-                });
+                        return work.date.getFullYear();
+                    });
                 grouped = flatMap(grouped, (workArray, year) => {
                     return {
                         year,
                         months: groupByMonths(workArray),
-                    }
+                    };
                 });
                 grouped = sortBy(grouped, ['year']).reverse();
                 return grouped;
