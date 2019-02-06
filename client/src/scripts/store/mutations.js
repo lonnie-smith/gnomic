@@ -6,6 +6,7 @@ export const types = {
     FETCH_FRAGMENTS_CONTENT: 'fetchFragmentsContent',
     FETCHED_FRAGMENTS_CONTENT: 'fetchedFragmentsContent',
     SET_ITEM_IN_VIEWPORT: 'setItemInViewport',
+    SET_WORKS_SORT: 'setWorksSort',
 };
 
 const itemsInViewport = [];
@@ -65,5 +66,16 @@ export const mutations = {
 
     [types.SET_ITEM_IN_VIEWPORT](state, itemId) {
         state.itemInViewport = itemId;
+    },
+
+    [types.SET_WORKS_SORT](state, { key, direction }) {
+        const worksSort = { ...state.worksSort };
+        if (key) {
+            worksSort.key = key;
+        }
+        if (direction) {
+            worksSort.direction = direction;
+        }
+        state.worksSort = worksSort;
     },
 };

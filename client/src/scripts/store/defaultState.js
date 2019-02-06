@@ -5,4 +5,8 @@ export const defaultState = {
     isFetchingFragments: false,
     fragmentsFetchError: null,
     itemInViewport: null,
+    worksSort: {
+        key: 'author',
+        direction: 'asc',
+    },
 };

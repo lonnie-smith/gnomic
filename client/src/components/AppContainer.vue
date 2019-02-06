@@ -39,6 +39,7 @@ import Works from './pages/WorksPage.vue';
 import Topics from './pages/TopicsPage.vue';
 import Fragments from './pages/FragmentsPage.vue';
 import Timeline from './Timeline.vue';
+import WorkSorter from './WorkSorter.vue';
 
 const routes = [
     { path: '/', redirect: '/chronology' },
@@ -48,7 +49,7 @@ const routes = [
     },
     {
         path: '/works',
-        components: { main: Works },
+        components: { main: Works, sidebar: WorkSorter },
     },
     {
         path: '/topics',
