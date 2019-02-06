@@ -64,7 +64,7 @@ function getAuthor(filePath, vfile) {
 
     let name;
     try {
-        name = parseAuthor(author, true);
+        name = parseAuthor(author);
     } catch (e) {
         throw new Error(`Could not parse author name in ${filePath}.`);
     }

@@ -85,10 +85,13 @@ module.exports = class Work extends BaseModel {
     }
 
     async save(currentTransaction = null) {
-        return super.save({
-            authorFirstName: this.authorFirstName,
+        const query = {
             authorLastName: this.authorLastName,
             title: this.title,
-        }, currentTransaction);
+        };
+        if (this.authorFirstName) {
+            query.authorFirstName = this.authorFirstName;
+        }
+        return super.save(query, currentTransaction);
     }
 };
