@@ -6,7 +6,7 @@ date: 2/13/2016
 tags: 
     - Genre
     - Fiction
-    - Non-Fiction
+    - Nonfiction
     - Romanticism
     - Memoir
 ---

@@ -7,6 +7,7 @@ date: 2/6/2016
 tags: 
     - Henry David Thoreau [person]
     - Nature
+    - Transcendentalism
 ---
 
 # On nature writing & nature as therapy
