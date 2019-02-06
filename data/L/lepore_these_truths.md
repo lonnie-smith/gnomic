@@ -11,6 +11,7 @@ tags:
     - Progress
     - c19 [period]
     - History
+    - Visual Art
 ---
 
 # On the Democratic Potential of Photography

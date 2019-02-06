@@ -9,6 +9,7 @@ tags:
     - Memoir
     - Genre
     - Narrative
+    - Novel
 ---
 
 # On Narrative Fiction and Memoir

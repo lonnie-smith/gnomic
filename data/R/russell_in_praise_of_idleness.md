@@ -6,7 +6,7 @@ date: 06/16/2008
 tags:
     - Class
     - Careers
-    - Idleness
+    - Leisure Class
     - Education
     - Humanities
 ---

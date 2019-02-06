@@ -8,6 +8,7 @@ tags:
     - Reading
     - Fiction
     - William Gaddis [person]
+    - Novel
 ---
 
 # On Difficulty in Fiction

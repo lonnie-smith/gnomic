@@ -16,6 +16,7 @@ tags:
     - Remainder [work]
     - David Foster Wallace [person]
     - Authenticity
+    - Novel
 ---
 
 # On Lyrical Realism

@@ -6,6 +6,7 @@ date: 4/1/2007
 tags:
     - Fiction
     - Tragedy
+    - Novel
 ---
 
 # On the Uses of Tragedy

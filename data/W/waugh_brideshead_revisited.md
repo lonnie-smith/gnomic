@@ -9,6 +9,7 @@ tags:
     - c20 [period]
     - Aristocracy
     - Painting
+    - Visual Art
 ---
 
 # On English Architecture

@@ -7,6 +7,7 @@ tags:
     - Progress
     - Consumerism
     - Literacy
+    - Novel
 ---
 
 # On the Decline in Literacy and Consumerism

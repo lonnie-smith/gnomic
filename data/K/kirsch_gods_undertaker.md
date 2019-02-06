@@ -11,6 +11,7 @@ tags:
     - c19 [period]
     - c20 [period]
     - Modernism
+    - Novel
 ---
 
 # On Hardy's Atheism
