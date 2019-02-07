@@ -4,7 +4,7 @@ publicationYear: 2007
 author: Rosenberg, Scott
 date: 4/23/2007
 tags:
-    - Software
+    - Computing
     - Donald Knuth [person]
     - Joel Spolsky [person]
 ---

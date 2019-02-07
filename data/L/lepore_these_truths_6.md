@@ -4,7 +4,6 @@ publicationYear: 2018
 author: Lepore, Jill
 date: 2/4/2019
 tags:
-    - History
     - c19 [period]
     - William Dean Howells [person]
     - Abraham Lincoln [person]

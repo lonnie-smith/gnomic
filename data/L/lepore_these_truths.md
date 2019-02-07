@@ -10,7 +10,6 @@ tags:
     - Democracy
     - Progress
     - c19 [period]
-    - History
     - Visual Art
 ---
 

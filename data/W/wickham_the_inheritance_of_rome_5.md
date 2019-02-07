@@ -7,7 +7,6 @@ tags:
     - Early Medieval [period]
     - Cultural Capital
     - Literacy
-    - History
     - Architecture
 ---
 

@@ -5,7 +5,7 @@ url: "https://www.ftrain.com/the-tour-005"
 author: Ford, Paul
 date: 8/16/2007
 tags:
-    - Software
+    - Computing
 ---
 
 # Assembler is the Latin of Programming

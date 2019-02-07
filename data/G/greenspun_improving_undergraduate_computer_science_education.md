@@ -5,7 +5,7 @@ url: "https://philip.greenspun.com/blog/2007/08/23/improving-undergraduate-compu
 author: Greenspun, Philip
 date: 10/27/2007
 tags:
-    - Software
+    - Computing
     - Education
 ---
 

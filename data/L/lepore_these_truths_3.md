@@ -4,7 +4,6 @@ publicationYear: 2018
 author: Lepore, Jill
 date: 1/20/2019
 tags:
-    - History
     - Race
     - Slavery
     - David Walker [person]

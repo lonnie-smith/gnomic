@@ -7,7 +7,6 @@ tags:
     - Religion
     - Evangelicalism
     - Secularism
-    - History
     - c19 [period]
 ---
 

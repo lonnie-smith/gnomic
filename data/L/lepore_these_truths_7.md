@@ -4,7 +4,6 @@ publicationYear: 2018
 author: Lepore, Jill
 date: 2/4/2019
 tags:
-    - History
     - c19 [period]
     - John Brown [person]
     - Frederick Douglass [person]
