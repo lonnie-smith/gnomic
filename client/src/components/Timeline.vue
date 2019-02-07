@@ -54,14 +54,53 @@
 import { mapState } from 'vuex';
 import { sortBy, groupBy, flatMap } from 'lodash';
 import { store } from '../scripts/store';
+import { filterFragments } from '../scripts/util/filterFragments';
 
 export default {
     store,
+    props: {
+        slug: {
+            type: String,
+            'default': null,
+        },
+        tag: {
+            type: String,
+            'default': null,
+        },
+        author: {
+            type: String, // last, first
+            'default': null,
+        },
+        workId: {
+            type: Number,
+            'default': null,
+        },
+    },
     computed: {
         ...mapState({
-            groupedWorks: state => {
+            works(state) {
+                if (!(this.slug || this.tag || this.author || this.workId)) {
+                    console.log('foo');
+                    return state.works;
+                }
+                const fragments = filterFragments({
+                    fragments: state.fragments,
+                    works: state.works,
+                    tags: state.tags,
+                    slug: this.slug,
+                    authorName: this.authorName,
+                    workId: this.workId,
+                    tag: this.tag,
+                });
+                const works = {};
+                Object.values(fragments).forEach(fragment => {
+                    works[fragment.workId] = state.works[fragment.workId];
+                });
+                return works;
+            },
+            groupedWorks(state) {
                 let grouped = groupBy(
-                    Object.values(state.works),
+                    Object.values(this.works),
                     work => {
                         return work.date.getFullYear();
                     });
@@ -100,7 +139,6 @@ export default {
                     const scrollDist = this.$refs
                         .timelineContainer
                         .scrollTop;
-                    console.log(pipTop, containerTop);
                     return pipTop - containerTop + scrollDist;
                 }
                 return -1000;

@@ -13,9 +13,9 @@
 
 <script>
 import { mapState } from 'vuex';
-import { find } from 'lodash';
 
 import { store, mutations, actions } from '../../scripts/store';
+import { filterFragments } from '../../scripts/util/filterFragments';
 import FragmentList from '../FragmentList.vue';
 
 export default {
@@ -104,47 +104,15 @@ export default {
     },
     methods: {
         setFilteredFragments() {
-            const filteredFragments = Object.values(this.fragments)
-                .filter(fragment => {
-                    if (this.slug) {
-                        if (fragment.slug !== this.slug) {
-                            return false;
-                        }
-                    }
-                    if (this.authorName) {
-                        const work = this.works[fragment.workId];
-                        if (work.authorFirstName !== this.authorName.first
-                            || work.authorLastName !== this.authorName.last) {
-                            return false;
-                        }
-                    }
-                    if (this.workId) {
-                        if (fragment.workId !== this.workId) {
-                            return false;
-                        }
-                    }
-                    if (this.tag) {
-                        const tag = find(this.tags, { tag: this.tag });
-                        let found = false;
-                        for (const tagId of fragment.tagIds) {
-                            if (tagId === tag.id) {
-                                found = true;
-                                break;
-                            }
-                        }
-                        if (!found) {
-                            return false;
-                        }
-                    }
-                    return true;
-                })
-                .reduce((dict, fragment) => {
-                    return {
-                        ...dict,
-                        [fragment.id]: fragment,
-                    };
-                }, {});
-            this.filteredFragments = filteredFragments;
+            this.filteredFragments = filterFragments({
+                fragments: this.fragments,
+                works: this.works,
+                tags: this.tags,
+                slug: this.slug,
+                authorName: this.authorName,
+                workId: this.workId,
+                tag: this.tag,
+            });
         },
     },
 };

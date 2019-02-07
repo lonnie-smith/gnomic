@@ -31,15 +31,8 @@ const routes = [
         path: '/fragments',
         components: { main: Fragments, sidebar: Timeline },
         props: {
-            main: route => {
-                return {
-                    ...route.query,
-                    workId: route.query.workId
-                        ? parseInt(route.query.workId, 10)
-                        : null,
-                };
-            },
-            sidebar: false,
+            main: queryToProps,
+            sidebar: queryToProps,
         },
     },
 ];
@@ -49,3 +42,12 @@ export const router = new VueRouter({
     mode: 'hash',
     linkActiveClass: 'isActive',
 });
+
+function queryToProps(route) {
+    return {
+        ...route.query,
+        workId: route.query.workId
+            ? parseInt(route.query.workId, 10)
+            : null,
+    };
+}
