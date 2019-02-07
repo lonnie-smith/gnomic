@@ -6,7 +6,7 @@ export default {
     props: {
         contentHtml: {
             type: String,
-            required: true,
+            'default': '',
         },
     },
     render(createElement) {

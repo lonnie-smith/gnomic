@@ -113,7 +113,6 @@ export default {
     watch: {
         fragmentIds(newIds, oldIds) {
             if (this.isVisible) {
-                console.log('ids changed; fetching')
                 this.fetchContent();
             }
         }
