@@ -110,11 +110,19 @@ export default {
             isVisible: false,
         };
     },
+    watch: {
+        fragmentIds(newIds, oldIds) {
+            if (this.isVisible) {
+                console.log('ids changed; fetching')
+                this.fetchContent();
+            }
+        }
+    },
     computed: {
         ...mapState({
             fragments(state) {
                 const fragments = this.fragmentIds.map(id => {
-                    return state.fragments[id];
+                    return { ...state.fragments[id] };
                 });
                 return sortBy(fragments, ['date']);
             },
@@ -164,7 +172,9 @@ export default {
             removeItemInViewport: actions.REMOVE_ITEM_IN_VIEWPORT,
         }),
         fetchContent() {
-            const fragmentIds = this.fragments.map(f => parseInt(f.id, 10));
+            const fragmentIds = this.fragments
+                .filter(f => f.content == null)
+                .map(f => parseInt(f.id, 10));
             this.fetch({ fragmentIds });
         },
         onIntersectionChange(entries, observer) {
