@@ -10,39 +10,41 @@
             }"
             class="timeline__indicator"
         />
-        <div
-            v-for="yearGroup of groupedWorks"
-            :key="yearGroup.year"
-            class="timeline__yearGroup"
-        >
-            <h2 class="timeline__yearGroup__title">
-                {{ yearGroup.year }}
-            </h2>
+        <div class="timeline__wrapper">
             <div
-                v-for="monthGroup of yearGroup.months"
-                :key="monthGroup.month"
-                class="timeline__yearGroup__monthGroup"
+                v-for="yearGroup of groupedWorks"
+                :key="yearGroup.year"
+                class="timeline__yearGroup"
             >
-                <h3 class="timeline__yearGroup__monthGroup__title">
-                    {{ intToMonth(monthGroup.month) }}
-                </h3>
-                <ul
-                    class="timeline__yearGroup__monthGroup__list"
+                <h2 class="timeline__yearGroup__title">
+                    {{ yearGroup.year }}
+                </h2>
+                <div
+                    v-for="monthGroup of yearGroup.months"
+                    :key="monthGroup.month"
+                    class="timeline__yearGroup__monthGroup"
                 >
-                    <li
-                        v-for="work of monthGroup.works"
-                        :key="work.id"
-                        class="timeline__yearGroup__monthGroup__list__item"
-                        role="button"
-                        @click="requestScroll($event, work.id)"
+                    <h3 class="timeline__yearGroup__monthGroup__title">
+                        {{ intToMonth(monthGroup.month) }}
+                    </h3>
+                    <ul
+                        class="timeline__yearGroup__monthGroup__list"
                     >
-                        <span>{{ workDisplay(work) }}</span>
-                        <div
-                            :ref="`pip_${work.id}`"
-                            class="timeline__yearGroup__monthGroup__list__item__pip"
-                        />
-                    </li>
-                </ul>
+                        <li
+                            v-for="work of monthGroup.works"
+                            :key="work.id"
+                            class="timeline__yearGroup__monthGroup__list__item"
+                            role="button"
+                            @click="requestScroll($event, work.id)"
+                        >
+                            <span>{{ work.authorLastName }}</span>
+                            <div
+                                :ref="`pip_${work.id}`"
+                                class="timeline__yearGroup__monthGroup__list__item__pip"
+                            />
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -95,7 +97,11 @@ export default {
                         .timelineContainer
                         .getBoundingClientRect()
                         .top;
-                    return pipTop - containerTop;
+                    const scrollDist = this.$refs
+                        .timelineContainer
+                        .scrollTop;
+                    console.log(pipTop, containerTop);
+                    return pipTop - containerTop + scrollDist;
                 }
                 return -1000;
             },
@@ -124,16 +130,6 @@ export default {
                 detail: { workId },
             });
             event.target.dispatchEvent(toEmit);
-        },
-        workDisplay(work) {
-            const initials = work.authorFirstName.length > 0
-                ? work.authorFirstName.split(/\.|\s+/g)
-                    .map(word => word.slice(0, 1))
-                    .filter(letter => letter === letter.toUpperCase())
-                    .concat('')
-                    .join('.') + ' '
-                : '';
-            return `${initials}${work.authorLastName}`;
         },
     },
 }

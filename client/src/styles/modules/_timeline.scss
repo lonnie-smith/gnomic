@@ -1,9 +1,15 @@
 .timeline {
-    max-height: 100%;
+    max-height: calc(100% - 4rem);
     overflow: auto;
     box-sizing: border-box;
     position: relative;
     margin: 2rem 2rem 2rem 0;
+    transform: translateY(-1px);
+    top: 1px;
+}
+
+.timeline__wrapper {
+    position: relative;
     &:after {
         content: '';
         position: absolute;
