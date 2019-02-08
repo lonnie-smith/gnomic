@@ -1,0 +1,27 @@
+.list {
+    & > * {
+        margin-left: 1em;
+        margin-bottom: 0.33em;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.list--nested {
+}
+
+.list--nested--l1 {
+    font-family: $FONT_SANS_SC;
+    font-weight: 600;
+    list-style-type: none;
+    font-size: $FONT_SIZE_MEDIUM;
+}
+
+.list--nested--l2 {
+    font-family: $FONT_SANS;
+    font-weight: 400;
+    list-style-type: disc;
+    margin: 0.5em 0 1em 1em;
+    font-size: $FONT_SIZE_DEFAULT;
+}

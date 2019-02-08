@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ul>
+        <ul class="list list--nested list--nested--l1">
             <li
                 v-for="(works, index) of authorGroups"
                 :key="index"
@@ -16,7 +16,7 @@
                     </span>
                 </gnomic-fragments-link>
 
-                <ul>
+                <ul class="list list--nested list--nested--l2">
                     <li
                         v-for="work of works"
                         :key="work.id"

@@ -33,7 +33,7 @@ export function title(string) {
 }
 
 export function caseInsensitive(string) {
-    return string.toLowerCase();
+    return string ? string.toLowerCase() : '';
 }
 
 const BC_RX = /BCE|BC|B\.\s*C\.\s*E\.|B\.\s*C\./;
