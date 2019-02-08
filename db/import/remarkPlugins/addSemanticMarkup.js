@@ -46,23 +46,23 @@ function chunk(children) {
     if (currentChunk) {
         chunks.push(currentChunk);
     }
-    return chunks.map(chunkToAccordionNode);
+    return chunks.map(chunkToSectionNode);
 }
 
 // convert object made by `chunk` to an AST node
-function chunkToAccordionNode(chunk) {
-    // if chunk has no heading, do not convert it into an accordion.
+function chunkToSectionNode(chunk) {
+    // if chunk has no heading, just wrap it in <section> tags.
     if (!chunk.heading) {
         return {
             type: 'section',
             data: {
                 hName: 'section',
-                children: chunk.children,
             },
+            children: chunk.children,
         };
     }
 
-    // else, convert to an "accordion" section.
+    // else, put both heading & other children into the section
     const header = {
         ...chunk.heading,
         data: {
@@ -70,7 +70,7 @@ function chunkToAccordionNode(chunk) {
         },
     };
     return {
-        type: 'accordion',
+        type: 'section',
         data: {
             hName: 'section',
         },

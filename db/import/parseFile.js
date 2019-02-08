@@ -10,6 +10,7 @@ const yaml = require('yaml').parse;
 
 const addSemanticMarkup = require('./remarkPlugins/addSemanticMarkup');
 const removeFrontmatter = require('./remarkPlugins/removeFrontmatter');
+const extractPlainText = require('./remarkPlugins/extractPlainText');
 const fixTypography = require('./remarkPlugins/fixTypography');
 
 module.exports = function(filePath) {
@@ -25,6 +26,7 @@ module.exports = function(filePath) {
             ])
             .use(extract, { yaml })
             .use(removeFrontmatter)
+            .use(extractPlainText)
             .use(fixTypography)
             .use(html)
             .use(addSemanticMarkup)

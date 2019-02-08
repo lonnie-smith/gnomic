@@ -7,6 +7,9 @@ export const types = {
     FETCHED_FRAGMENTS_CONTENT: 'fetchedFragmentsContent',
     SET_ITEM_IN_VIEWPORT: 'setItemInViewport',
     SET_WORKS_SORT: 'setWorksSort',
+    SET_DATA_CACHE_VERSION: 'setDataCacheVersion',
+    FETCH_FULL_TEXT_INDEX: 'fetchFullTextIndex',
+    FETCHED_FULL_TEXT_INDEX: 'fetchedFullTextIndex',
 };
 
 const itemsInViewport = [];
@@ -77,5 +80,25 @@ export const mutations = {
             worksSort.direction = direction;
         }
         state.worksSort = worksSort;
+    },
+
+    [types.SET_DATA_CACHE_VERSION](state, version) {
+        state.dataCacheVersion = version;
+    },
+
+    [types.FETCH_FULL_TEXT_INDEX](state) {
+        state.isFetchingFullTextIndex = true;
+    },
+
+    [types.FETCHED_FULL_TEXT_INDEX](state, { version, index, error }) {
+        state.isFetchingFullTextIndex = false;
+        if (error) {
+            state.fullTextIndexFetchError = error;
+        } else {
+            state.fullTextIndex = {
+                version,
+                index,
+            };
+        }
     },
 };

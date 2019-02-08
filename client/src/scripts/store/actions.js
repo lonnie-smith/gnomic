@@ -3,11 +3,12 @@ import { types as mutations } from './mutations';
 
 export const types = {
     FETCH_FRAGMENTS_CONTENT: 'fetchFragmentsContent',
+    FETCH_FULL_TEXT_INDEX: 'fetchFullTextIndex',
     REMOVE_ITEM_IN_VIEWPORT: 'removeItemInViewport',
     SET_ITEM_IN_VIEWPORT: 'setItemInViewport',
 };
 
-let itemsInViewport = {};
+const itemsInViewport = {};
 
 export const actions = {
     async [types.FETCH_FRAGMENTS_CONTENT]({ commit, state }, { fragmentIds }) {
@@ -25,7 +26,19 @@ export const actions = {
                 fragments,
             });
         } catch (error) {
+            console.error(error);
             commit(mutations.FETCHED_FRAGMENTS_CONTENT, { error });
+        }
+    },
+
+    async [types.FETCH_FULL_TEXT_INDEX]({ commit, state }) {
+        commit(mutations.FETCH_FULL_TEXT_INDEX);
+        try {
+            const { version, index } = await api.fetchSearchIndex(state.dataCacheVersion);
+            commit(mutations.FETCHED_FULL_TEXT_INDEX, { version, index });
+        } catch (error) {
+            console.error(error);
+            commit(mutations.FETCHED_FULL_TEXT_INDEX, { error });
         }
     },
 

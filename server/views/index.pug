@@ -13,6 +13,7 @@ html
 body
     div(id="appRoot" class="appRoot")
         gnomic-app-container(
+            :data-cache-version!=`${cacheBuster}`
             :fragments!=`${fragments}`
             :works!=`${works}`
             :tags!=`${tags}`

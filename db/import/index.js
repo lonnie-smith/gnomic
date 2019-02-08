@@ -1,14 +1,17 @@
 const glob = require('glob');
+const fs = require('fs');
 
 const parse = require('./parseFile');
 const store = require('./storeFile');
 
 const db = require('../db');
+const FullTextIndex = require('./FullTextIndex');
 const Fragment = require('../models/fragment');
 
 doImport();
 
 async function doImport() {
+    const fullTextIndex = new FullTextIndex();
     await db.migrate.latest();
     const paths = glob.sync('./data/**/*.md');
     // const paths = glob.sync('./data/**/*.md').filter(f => f.indexOf('_for_hawk.md') > 0);
@@ -23,7 +26,7 @@ async function doImport() {
         }
         let slug;
         try {
-            slug = await store(path, vfile);
+            slug = await store(path, vfile, fullTextIndex);
         } catch (e) {
             console.error(`Error parsing ${path}`, e);
             return;
@@ -43,6 +46,10 @@ async function doImport() {
         + ` ${tagCt[0].count} tags`);
 
     await db.destroy();
+
+    const index = fullTextIndex.index;
+    const json = JSON.stringify(index);
+    fs.writeFileSync(process.env.INDEX_FILE, json);
 }
 
 async function doCleanup(currentSlugs) {

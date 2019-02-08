@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const api = require('./api');
 const escapeData = require('./util/escapeData');
 const errorMessage = require('./util/errorMessage');
 const Fragment = require('../db/models/fragment');
@@ -22,6 +21,9 @@ const WEB_CACHE_BUSTER = (new Date()).valueOf();
 const DATA_CACHE_TIMEOUT = 60 * 1000; // one minute
 let dataCache = null;
 let nextCacheUpdate = null;
+
+const api = require('./api')(WEB_CACHE_BUSTER);
+
 
 app.use('/assets', express.static('server/static/assets', {
     fallthrough: false,

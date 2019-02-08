@@ -12,6 +12,12 @@ npm-debug.log
 # database
 devDb.sqlite3
 devDb.sqlite3-journal
+prodDb.sqlite3
+prodDb.sqlite3-journal
+
+# search indexes
+devIndex.json
+prodIndex.json
 
 # front-end build output
 server/static

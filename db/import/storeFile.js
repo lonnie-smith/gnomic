@@ -8,7 +8,7 @@ const Tag = require('../models/tag');
 
 const TAG_TYPE_RX = /(.*?)\s+\[(.*)\]/;
 
-module.exports = async function(filePath, vfile) {
+module.exports = async function storeFile(filePath, vfile, fullTextIndex) {
     const slug = getSlug(filePath);
     const authorName = getAuthor(filePath, vfile);
     const title = getTitle(filePath, vfile);
@@ -46,6 +46,8 @@ module.exports = async function(filePath, vfile) {
         tags: tagModels,
     });
     await fragment.save();
+
+    fullTextIndex.addFragment(vfile.data.plainText, fragment.id);
 
     return fragment.slug;
 };
