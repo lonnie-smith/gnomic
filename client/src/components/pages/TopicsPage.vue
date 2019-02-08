@@ -1,23 +1,25 @@
 <template>
     <div>
-        <section
+        <ul class="list list--nested list--nested--l1"
             v-for="(tagGroup, index) of tagGroups"
             :key="index"
         >
-            <h2>{{ tagGroup.title }}</h2>
-            <ul>
-                <li
-                    v-for="tag of tagGroup.tags"
-                    :key="tag.id"
-                >
-                    <gnomic-fragments-link
-                        :query="{ tag: tag.tag }"
+            <li>
+                {{ tagGroup.title }}
+                <ul class="list list--nested list--nested--l2">
+                    <li
+                        v-for="tag of tagGroup.tags"
+                        :key="tag.id"
                     >
-                        {{ tag.tag }}
-                    </gnomic-fragments-link>
-                </li>
-            </ul>
-        </section>
+                        <gnomic-fragments-link
+                            :query="{ tag: tag.tag }"
+                        >
+                            {{ tag.tag }} ({{ tag.fragmentIds.length }})
+                        </gnomic-fragments-link>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -46,7 +48,10 @@ export default {
             tagGroups: state => {
                 const groups = [];
                 const dict = {};
-                const tags = sortBy(state.tags, [tag => caseInsensitive(tag.tag)]);
+                const tags = sortBy(state.tags, [
+                    tag => tag.fragmentIds.length * -1,
+                    tag => caseInsensitive(tag.tag),
+                ]);
                 tags.forEach(tag => {
                     const index = dict[tag.type];
                     let group;
