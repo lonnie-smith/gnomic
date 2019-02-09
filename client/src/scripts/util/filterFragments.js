@@ -8,6 +8,7 @@ export function filterFragments({
     authorName = null,
     workId = null,
     tag = null,
+    ids = [],
 }) {
     return Object.values(fragments)
         .filter(fragment => {
@@ -38,6 +39,11 @@ export function filterFragments({
                     }
                 }
                 if (!found) {
+                    return false;
+                }
+            }
+            if (ids.length > 0) {
+                if (!(ids.includes(fragment.id))) {
                     return false;
                 }
             }

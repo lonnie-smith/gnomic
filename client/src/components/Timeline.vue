@@ -1,7 +1,7 @@
 <template>
     <div
-        class="timeline"
         ref="timelineContainer"
+        class="timeline"
     >
         <div
             :style="{
@@ -12,7 +12,7 @@
         />
         <div class="timeline__wrapper">
             <div
-                v-for="yearGroup of groupedWorks"
+                v-for="yearGroup of filteredWorkGroups"
                 :key="yearGroup.year"
                 class="timeline__yearGroup"
             >
@@ -75,55 +75,21 @@ export default {
             type: Number,
             'default': null,
         },
+        ids: {
+            type: Array,
+            'default': () => [],
+        },
+    },
+    data() {
+        return {
+            filteredWorkGroups: [],
+        };
     },
     computed: {
         ...mapState({
-            works(state) {
-                if (!(this.slug || this.tag || this.author || this.workId)) {
-                    return state.works;
-                }
-                const fragments = filterFragments({
-                    fragments: state.fragments,
-                    works: state.works,
-                    tags: state.tags,
-                    slug: this.slug,
-                    authorName: this.authorName,
-                    workId: this.workId,
-                    tag: this.tag,
-                });
-                const works = {};
-                Object.values(fragments).forEach(fragment => {
-                    works[fragment.workId] = state.works[fragment.workId];
-                });
-                return works;
-            },
-            groupedWorks(state) {
-                let grouped = groupBy(
-                    Object.values(this.works),
-                    work => {
-                        return work.date.getFullYear();
-                    });
-                grouped = flatMap(grouped, (workArray, year) => {
-                    return {
-                        year,
-                        months: groupByMonths(workArray),
-                    };
-                });
-                grouped = sortBy(grouped, ['year']).reverse();
-                return grouped;
-
-                function groupByMonths(works) {
-                    let grouped = groupBy(works, work => work.date.getMonth());
-                    grouped = flatMap(grouped, (workArray, month) => {
-                        return {
-                            month: parseInt(month, 10),
-                            works: sortBy(workArray, ['date', 'id']).reverse(),
-                        };
-                    });
-                    grouped = sortBy(grouped, ['month']).reverse();
-                    return grouped;
-                }
-            },
+            works: state => state.works,
+            tags: state => state.tags,
+            fragments: state => state.fragments,
             pipPosition(state) {
                 const workId = state.itemInViewport;
                 const pips = this.$refs[`pip_${workId}`];
@@ -143,6 +109,26 @@ export default {
                 return -1000;
             },
         }),
+    },
+    watch: {
+        slug() {
+            this.setFilteredWorkGroups();
+        },
+        tag() {
+            this.setFilteredWorkGroups();
+        },
+        author() {
+            this.setFilteredWorkGroups();
+        },
+        workId() {
+            this.setFilteredWorkGroups();
+        },
+        ids() {
+            this.setFilteredWorkGroups();
+        },
+    },
+    mounted() {
+        this.setFilteredWorkGroups();
     },
     methods: {
         intToMonth(int) {
@@ -168,7 +154,54 @@ export default {
             });
             event.target.dispatchEvent(toEmit);
         },
+        getFilteredWorks() {
+            if (!(this.slug || this.tag || this.author || this.workId || this.ids.length > 0)) {
+                return this.works;
+            }
+            const fragments = filterFragments({
+                fragments: this.fragments,
+                works: this.works,
+                tags: this.tags,
+                slug: this.slug,
+                authorName: this.authorName,
+                workId: this.workId,
+                tag: this.tag,
+                ids: this.ids,
+            });
+            const works = {};
+            Object.values(fragments).forEach(fragment => {
+                works[fragment.workId] = this.works[fragment.workId];
+            });
+            return works;
+        },
+        setFilteredWorkGroups() {
+            let grouped = groupBy(
+                Object.values(this.getFilteredWorks()),
+                work => {
+                    return work.date.getFullYear();
+                });
+            grouped = flatMap(grouped, (workArray, year) => {
+                return {
+                    year,
+                    months: groupByMonths(workArray),
+                };
+            });
+            grouped = sortBy(grouped, ['year']).reverse();
+            this.filteredWorkGroups = grouped;
+
+            function groupByMonths(works) {
+                let grouped = groupBy(works, work => work.date.getMonth());
+                grouped = flatMap(grouped, (workArray, month) => {
+                    return {
+                        month: parseInt(month, 10),
+                        works: sortBy(workArray, ['date', 'id']).reverse(),
+                    };
+                });
+                grouped = sortBy(grouped, ['month']).reverse();
+                return grouped;
+            }
+        },
     },
-}
+};
 
 </script>

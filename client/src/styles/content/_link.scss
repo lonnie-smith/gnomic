@@ -1,11 +1,16 @@
 .link {
     color: $COLOR_ACCENT_PRIMARY;
     text-decoration: none;
+    cursor: pointer;
 
     &:hover {
         color: $COLOR_ACCENT_SECONDARY_DARK;
         border-bottom: 1px solid $COLOR_ACCENT_PRIMARY;
     }
+}
+
+.link--subtle {
+    color: inherit;
 }
 
 .link--light {

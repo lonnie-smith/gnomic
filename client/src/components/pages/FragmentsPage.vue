@@ -40,6 +40,10 @@ export default {
             type: Number,
             'default': null,
         },
+        ids: {
+            type: Array,
+            'default': () => [],
+        },
     },
     data() {
         return {
@@ -98,6 +102,9 @@ export default {
         workId() {
             this.setFilteredFragments();
         },
+        ids() {
+            this.setFilteredFragments();
+        },
     },
     mounted() {
         this.setFilteredFragments();
@@ -112,6 +119,7 @@ export default {
                 authorName: this.authorName,
                 workId: this.workId,
                 tag: this.tag,
+                ids: this.ids,
             });
         },
     },

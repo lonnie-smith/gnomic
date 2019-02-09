@@ -44,10 +44,19 @@ export const router = new VueRouter({
 });
 
 function queryToProps(route) {
+    let ids = [];
+    if (route.query.ids) {
+        try {
+            ids = JSON.parse(route.query.ids);
+        } catch (e) {
+            // ignore bad param
+        }
+    }
     return {
         ...route.query,
         workId: route.query.workId
             ? parseInt(route.query.workId, 10)
             : null,
+        ids,
     };
 }
