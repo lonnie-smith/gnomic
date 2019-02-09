@@ -2,7 +2,6 @@
     <div
         ref="container"
         class="search"
-        @focusout="onFocusOut($event)"
     >
         <input
             ref="input"
@@ -10,10 +9,11 @@
             v-model.trim="query"
             type="search"
             class="search__input"
+            @focus="open"
             @keypress="onInputKeypress($event)"
         />
         <div
-            v-show="showSearchResults"
+            v-show="showResults"
             class="search__results"
         >
             <h1 class="isVisuallyHidden">Search Results</h1>
@@ -28,6 +28,7 @@
                     <li
                         v-for="result of fullTextResults"
                         :key="result.work.id"
+                        role="button"
                     >
                         <em>{{ result.work.authorLastName }}</em>,
                         {{ abbreviateTitle(result.work.title) }}
@@ -81,6 +82,10 @@ export default {
             this.indexReady = true;
         });
     },
+    mounted() {
+        document.addEventListener('focusin', event => this.onLostFocus(event));
+        document.addEventListener('click', event => this.onLostFocus(event));
+    },
     methods: {
         ...mapActions({
             fetchIndex: actions.FETCH_FULL_TEXT_INDEX,
@@ -121,7 +126,7 @@ export default {
                 .split(/:\s+/)[0];
         },
         loadResults(fragmentIds = null) {
-            
+            console.log('loadResults', fragmentIds);
         },
         open() {
             this.showResults = true;
@@ -132,12 +137,12 @@ export default {
                 this.$refs.input.focus();
             }
         },
-        onFocusOut(event) {
-            // if (this.$refs.container.contains(event.target)) {
-            //     return;
-            // } else {
-            //     this.close();
-            // }
+        onLostFocus(event) {
+            if (this.$refs.container.contains(event.target)) {
+                return;
+            } else {
+                this.close();
+            }
         },
         onInputKeypress(event) {
             switch (event.key) {
@@ -152,7 +157,19 @@ export default {
             }
             return true;
         },
-
+        onResultKeypress(event, result) {
+            switch (event.key) {
+                case 'Enter':
+                    this.loadResults(result.fragmentIds);
+                    break;
+                case 'Escape':
+                    this.close(true);
+                    break;
+            }
+        },
+        onResultClick(result) {
+            this.loadResults(result.fragmentIds);
+        },
     },
 };
 
