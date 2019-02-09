@@ -1,7 +1,7 @@
 const participles = ['de', 'du', 'van', 'tee', 'von', 'da', 'di'];
 export function surname(string) {
     const words = string.toLowerCase()
-        .replace(/[^a-z]/g, '')
+        .replace(/[^a-z0-9]/g, '')
         .split(/\s+/);
     if (words.length === 1) {
         return words[0];
@@ -18,7 +18,7 @@ export function surname(string) {
 const articles = ['a', 'an', 'the'];
 export function title(string) {
     const words = string.toLowerCase()
-        .replace(/[^a-z]/g, '')
+        .replace(/[^a-z0-9]/g, '')
         .split(/\s+/);
     if (words.length === 1) {
         return words[0];
