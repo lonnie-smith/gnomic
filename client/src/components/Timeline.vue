@@ -80,7 +80,6 @@ export default {
         ...mapState({
             works(state) {
                 if (!(this.slug || this.tag || this.author || this.workId)) {
-                    console.log('foo');
                     return state.works;
                 }
                 const fragments = filterFragments({
