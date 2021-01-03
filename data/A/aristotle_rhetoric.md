@@ -7,11 +7,14 @@ tags:
     - Rhetoric
     - Learning
     - Reading
+    - 
 ---
 
-# 
+# On Study
 
 > Duties and studies and exertions are painful; for these, too, are necessarily compulsions unless they become habitual; then habit makes them pleasurable. (I.11.4)
+
+# On the Characteristics of the Speaker
 
 > But since rhetoric is concerned with making a judgment ..., it is necessary not only to look to the argument, that it may be demonstrative and persuasive but also [for the speaker] to construct a view of himself as a certain kind of person and to prepare the judge; for it makes much difference in persuasion ... that the speaker seem to be a certain kind of person and that his hearers suppose him to be disposed toward them in a certain way. (II.1.2)
 
