@@ -7,6 +7,7 @@ tags:
     - c19 [period]
     - c20 [period]
     - Liberalism
+    - Neoliberalism
     - Conservatism
     - Income Inequality
     - Populism

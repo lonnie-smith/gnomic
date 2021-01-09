@@ -7,6 +7,7 @@ tags:
     - c20 [period]
     - c21 [period]
     - John Meynard Keynes [person]
+    - Neoliberalism
 ---
 
 # On the Birth and Death of the “Keynseian Settlment”
